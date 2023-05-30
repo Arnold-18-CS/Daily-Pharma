@@ -1,0 +1,15 @@
+fieldset{
+    background-color: beige;
+    border-style: dashed;
+    margin-right: 500px;
+}
+
+label{
+   margin-right: 10px; 
+}
+
+input{
+    margin-left: 5px;
+    align-self: start;
+    text-align: left;
+}
