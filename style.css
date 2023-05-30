@@ -1,7 +1,10 @@
 fieldset{
     background-color: beige;
     border-style: dashed;
-    margin-right: 500px;
+    position: absolute;
+    align-self: center;
+    text-align: center;
+
 }
 
 label{
@@ -12,4 +15,8 @@ input{
     margin-left: 5px;
     align-self: start;
     text-align: left;
+}
+
+div{
+    text-align: center;
 }
