@@ -1,0 +1,22 @@
+fieldset{
+    background-color: beige;
+    border-style: dashed;
+    position: absolute;
+    align-self: center;
+    text-align: center;
+
+}
+
+label{
+   margin-right: 10px; 
+}
+
+input{
+    margin-left: 5px;
+    align-self: start;
+    text-align: left;
+}
+
+div{
+    text-align: center;
+}
