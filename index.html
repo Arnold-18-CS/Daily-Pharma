@@ -15,7 +15,7 @@
                 <a href="index.html">DailyPharma</a>
             </div>
 
-            <nav>
+            <nav class= navbar id="navbar">
                 <a href="#">Home</a>
                 <a href="#">About Us</a>
                 <a href="#">Services</a>
@@ -23,6 +23,19 @@
                 <a href="#">Contact Us</a>
                 <button class="btn-login-popup">Login</button>
             </nav>
+
+            <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+            <div id="overlay" onclick="toggleOverlay()">
+                <div id="overlay-content">
+                    <a href="#">Home</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Services</a>
+                    <a href="#">Medications</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Login</a>
+                </div>
+            </div>
         </header>
     </section>
 
@@ -48,4 +61,35 @@
     </section>
     
 </body>
+
+<script>
+  // JavaScript code for handling the overlay
+  function toggleOverlay() {
+    var overlay = document.getElementById("overlay");
+    var overlayContent = document.getElementById("overlay-content");
+
+    if (overlay.style.width === "100%") {
+      overlay.style.width = "0";
+      overlayContent.style.display = "none";
+    } else {
+      overlay.style.width = "100%";
+      overlayContent.style.display = "block";
+    }
+  }
+
+  // Function to handle window resize event
+  function handleResize() {
+    var overlay = document.getElementById("overlay");
+    var overlayContent = document.getElementById("overlay-content");
+
+    if (window.innerWidth > 900) {
+      overlay.style.width = "0";
+      overlayContent.style.display = "none";
+    }
+  }
+
+  // Call the handleResize function initially and on window resize
+  handleResize();
+  window.addEventListener("resize", handleResize);
+  </script>
 </html>

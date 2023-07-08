@@ -31,6 +31,7 @@ header{
 }
 
 .logo{
+    float: left;
     font-size: 2em;
     color: black;
     cursor: pointer;
@@ -47,6 +48,7 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    overflow: hidden;
 }
 
 nav a{
@@ -80,6 +82,50 @@ nav a:hover::after{
     background: black;
 }
 
+.navbar-toggle {
+    float: right;
+    display: none;
+    color: #333;
+    font-size: 24px;
+    padding: 16px 20px;
+    cursor: pointer;
+}
+
+#overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(101, 225, 196, 0.9);
+    /*overflow-x: hidden;*/
+    transition: 0.5s;
+}
+
+#overlay-content {
+    display: none;
+}
+  
+#overlay-content a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+  
+#overlay-content a:hover {
+    color: black;
+}
+
 .btn-login-popup{
     width: 130px;
     height: 50px;
@@ -97,15 +143,45 @@ nav a:hover::after{
     font-size: 1.2em;
 }
 
+@media screen and (max-width: 900px) {
+    .navbar-toggle {
+      display: block;
+    }
+  
+    .navbar a {
+      display: none;
+    }
+  
+    #overlay{
+        display: flex;
+        justify-content: center;
+    }
+
+    .headline p{
+        margin-left: 20px;
+    }
+
+    #overlay-content a {
+      display: block;
+    }
+}
+
+.headline p:not(.span){
+    margin-left: 50px;
+}
+
 .headline p{
     font-size: 1.5em;
     font-weight: 700;
+    margin-left: 20px;
 }
 
 .headline p span{
     color: white;
     display: flex;
     justify-content: center;
+    letter-spacing: 2px;
+    margin-right: 100px;
 }
 
 .subheadline{
