@@ -12,6 +12,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background: url('bg3.jpg') no-repeat;
     background-size: cover;
     background-position: center;
@@ -99,7 +100,7 @@ nav a:hover::after{
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 0;
+    z-index: 2;
     top: 0;
     left: 0;
     background-color: rgba(101, 225, 196, 0.9);
@@ -218,4 +219,8 @@ nav a:hover::after{
     font-size: 1em;
 }
 
-
+.separator{
+    border: 2px solid black;
+    width: 100%;
+    margin-top: 100px;
+}
