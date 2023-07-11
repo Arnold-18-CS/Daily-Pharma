@@ -10,15 +10,15 @@
 <body>
 
     <section>
-        <header>
+        <header class="item">
             <div class="logo">
                 <a href="index.html">DailyPharma</a>
             </div>
 
             <nav class= navbar id="navbar">
-                <a href="#">Home</a>
+                <a href="index.html">Home</a>
                 <a href="#">About Us</a>
-                <a href="#">Services</a>
+                <a href="#feature">Services</a>
                 <a href="#">Medications</a>
                 <a href="#">Contact Us</a>
                 <button class="btn-login-popup">Login</button>
@@ -28,9 +28,9 @@
 
             <div id="overlay" onclick="toggleOverlay()">
                 <div id="overlay-content">
-                    <a href="#">Home</a>
+                    <a href="index.html">Home</a>
                     <a href="#">About Us</a>
-                    <a href="#">Services</a>
+                    <a href="#feature">Services</a>
                     <a href="#">Medications</a>
                     <a href="#">Contact Us</a>
                     <a href="#">Login</a>
@@ -39,8 +39,10 @@
         </header>
     </section>
 
+    <!-- -->
+
     <section>
-        <div class="above fold">
+        <div class="above-fold item">
             <div class="content">
                 <div class="headline">
                     <p>
@@ -60,15 +62,116 @@
         </div>
     </section>
 
-    <div class="separator"></div>
+    <!--
+    <div class="separator item"></div>
+    -->
 
-    <section>
-        <div class="below-fold">
-            <div class="benefits">
-                
+    <section id="feature" class="item below-fold">
+        <div class="title-text">
+            <p>FEATURE HIGHLIGHTS</p>
+            <h1>Benefits</h1>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Easy Prescription Management</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <img src="iconMedicine.png">
+                        </div>
+                        <p>
+                            Simplify your medication routine with DailyPharma's intuitive platform.
+                            Easily manage your prescriptions, refills, and dosage reminders in one place.    
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-img">
+                <img src="iconPres-mgt2.jpg">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Convenient Online Ordering</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-shopping-cart-alt"></i>
+                        </div>
+                        <p>
+                            Say goodbye to long waits at the pharmacy. 
+                            With DailyPharma, you can order your medications from the comfort of your home and have them delivered right to your doorstep.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-img">
+                <img src="iconOrderOnline.png">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Secure and Confidential</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-file-lock-alt"></i>
+                        </div>
+                        <p>
+                            At DailyPharma, we prioritize your privacy and security.
+                            Rest assured that your personal information and medical history are protected with robust encryption and strict confidentiality measures.    
+                        </p>
+                    </div>
+                </div>
             </div>
 
+            <div class="features-img">
+                <img src="iconSecure.jpg">
+            </div>
         </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Extensive Medication Inventory</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-store"></i>
+                        </div>
+                        <p>
+                            With a wide range of prescription medications available, DailyPharma covers a comprehensive list of commonly prescribed drugs.
+                            Find what you need and rely on us for accurate and reliable dispensing.                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-img">
+                <img src="iconInventory.jpg">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>User-Friendly Interface</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-user-check"></i>
+                        </div>
+                        <p>
+                            Our user-friendly platform makes it easy to navigate and access all the features you need.
+                             Enjoy a seamless and intuitive experience while managing your prescriptions.                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-img">
+                <img src="iconUserFriendly.jpg">
+            </div>
+        </div>
+
     </section>
     
 </body>
