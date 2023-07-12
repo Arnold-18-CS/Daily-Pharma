@@ -242,7 +242,7 @@ nav a:hover::after{
     width: 90%;
 }
 
-#feature, #service{
+#feature, #service, #testimonials{
     width: 100%;
     background: white;
     margin: 0;
@@ -407,7 +407,7 @@ nav a:hover::after{
 
 .Overlay{
     width: 100%;
-    height: 100%;
+    height: 98%;
     position: absolute;
     top: 0;
     border-radius: 7px;
@@ -502,4 +502,67 @@ hr{
         bottom: 3% !important;
     }
 
+}
+
+.testimonial-row{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.testimonial-col{
+    flex-basis: 30%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px 3px gray;
+    transition: 1s ease;
+}
+
+.testimonial-col:hover{
+    transform: translateY(-10px);
+    border-radius: 10px;
+    box-shadow: 0 20px 20px 3px black;
+}
+
+.testimonial-col p{
+    font-size: 14px;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.user .uil{
+    width: 20px;
+    margin-right: 20px;
+    color: #009688;
+    font-size: 20px;
+}
+
+.user-info h4{
+    margin-bottom: 0;
+}
+
+.user-info small{
+    color: #009688;
+}
+
+@media screen and (max-width:900px) {
+    .testimonial-row{
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:600px){
+    .testimonial-row{
+        width: 90%;
+    }
 }
