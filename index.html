@@ -118,7 +118,7 @@
                     <h3>Pharmaceutical Companies</h3>
                     <hr>
                     <p>
-                        We allow companiesto  manage their drugs and contracts with various pharmacies.
+                        We allow companies to manage their drugs and contracts with various pharmacies.
                     </p>
                 </div>
             </div>
@@ -355,38 +355,6 @@
             <p>&copy; 2023 DailyPharma. All rights reserved.</p>
         </div>
     </section>
-
-    
+    <script src="script.js"></script>
 </body>
-
-<script>
-  // JavaScript code for handling the overlay
-  function toggleOverlay() {
-    var overlay = document.getElementById("overlay");
-    var overlayContent = document.getElementById("overlay-content");
-
-    if (overlay.style.width === "100%") {
-      overlay.style.width = "0";
-      overlayContent.style.display = "none";
-    } else {
-      overlay.style.width = "100%";
-      overlayContent.style.display = "block";
-    }
-  }
-
-  // Function to handle window resize event
-  function handleResize() {
-    var overlay = document.getElementById("overlay");
-    var overlayContent = document.getElementById("overlay-content");
-
-    if (window.innerWidth > 900) {
-      overlay.style.width = "0";
-      overlayContent.style.display = "none";
-    }
-  }
-
-  // Call the handleResize function initially and on window resize
-  handleResize();
-  window.addEventListener("resize", handleResize);
-  </script>
 </html>

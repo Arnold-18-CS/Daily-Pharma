@@ -187,10 +187,10 @@ nav a:hover::after{
 
 
 .content{
-    margin-top: 300px;
+    margin-top: 250px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 750px) {
     
     .content{
         margin-top: 100px;
