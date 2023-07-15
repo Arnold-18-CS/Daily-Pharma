@@ -683,6 +683,11 @@ hr{
     background: url(bg3.jpg) no-repeat;
     background-position: center;
     background-size: cover;
+    height: 120vh;
+}
+
+.Login header, .Register header{
+    position: absolute;
 }
 
 .Login .title-text p{
@@ -711,7 +716,7 @@ hr{
     box-shadow: 0 10px 20px 0px;
     padding-bottom: 100px;
     top: 130px;
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 .users{
@@ -857,36 +862,50 @@ hr{
     color: black;
 }
 
+.btn-outline-primary{
+    color: black;
+    border: none;
+}
+
 label.left{
     left: -80px;
 }
 
 /*Register Section*/
 
-.form.register{
-    display: flex;
-    flex-direction: column;
+.Register .wrapper{
+    height: 750px;
+    transition: .5s;
+}
+
+.Register{
+    background-size: cover;
+    height: 150vh;   
+}
+
+.Register .form{
+    transform: translateX(70px);
 }
 
 .form .register_patient,.register_doctor,.register_pharmacy,.register_company{
-    transform: translateY(100PX);
-    transition: 2s ease;
+    transform: translateY(600PX);
+    transition: 1s ease;
 }
 
 .form .register_patient.active{
-    transform: translateY(-250px);
+    transform: translateY(-40px);
 }
 
 .form .register_doctor.active{
-    transform: translateY(-90px);
+    transform: translateY(-610px);
 }
 
 .form .register_pharmacy.active{
-    transform: translateY(-90px);
+    transform: translateY(-1130px);
 }
 
 .form .register_company.active{
-    transform: translateY(-90px);
+    transform: translateY(-1530px);
 }
 
 
