@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 *{
-    margin: 1;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    
 }
 
 body{
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
-    justify-content:flex-start;
+    justify-content:center;
     align-items: center;
 }
 
@@ -319,10 +320,11 @@ nav a:not(:last-child):hover::after{
 
 .title-text h1{
     font-size: 50px;
+    margin-bottom: 50px;
 }
 
 .feature-box{
-    width: 80%;
+    width: 90%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
@@ -676,6 +678,11 @@ hr{
     font-weight: 500;
 }
 
+@media screen and (max-width:500px) {
+    .footer-row{
+        flex-direction: column;
+    }
+}
 
 /*--Login Page--*/
 
@@ -686,7 +693,7 @@ hr{
     height: 120vh;
 }
 
-.Login header, .Register header{
+.Login header, .Register header, .PatientView header{
     position: absolute;
 }
 
@@ -907,6 +914,60 @@ label.left{
 .form .register_company.active{
     transform: translateY(-1530px);
 }
+
+
+/*Patients View*/
+
+.PatientView{
+    background: url(bg4.jpg) no-repeat;
+    background-size:cover ;
+    background-position: center;
+    height: 100vh;
+}
+
+.profile i{
+    font-size: 20px;
+
+}
+
+.profile a{
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width:500px) {
+    .profile{
+        display: none;
+    }
+}
+
+
+#inquiries{
+    margin-top: 65cm;
+    padding-top: 100px;
+}
+
+.form .col-form-label{
+    font-weight: 500;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #0ea83d;
+    box-shadow: 0 0 10px #0ea83d;
+}
+
+.btn-primary{
+    background-color: black;
+    outline: none;
+}
+
+.btn-primary:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
 
 
 
