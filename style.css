@@ -925,21 +925,43 @@ label.left{
     height: 100vh;
 }
 
-.profile i{
-    font-size: 20px;
+.PatientView header{
+    border-bottom: 5px solid white;
+}
 
+.PatientView nav a{
+    margin-top: 10px;
+    margin-right: 30px;
+}
+
+.profile{
+    padding: 7px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.profile a i{
+    font-size: 20px;
+    margin-right: 5px;
 }
 
 .profile a{
     text-decoration: none;
     color: black;
+    font-weight: 500;
+    font-size: 1.2em;
 }
 
-@media screen and (max-width:500px) {
-    .profile{
+@media screen and (max-width:1100px){
+    .navbar{
         display: none;
     }
+
+    .PatientView .navbar-toggle{
+        display: block;
+    }
 }
+
 
 
 #inquiries{
