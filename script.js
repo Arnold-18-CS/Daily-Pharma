@@ -28,54 +28,104 @@ handleResize();
 window.addEventListener("resize", handleResize);
 
 //Handling Login for different Users
-const activePatient = document.querySelector('.patient');
-const activeDoctor = document.querySelector('.doctor');
-const activePharmacy = document.querySelector('.pharmacy');
-const activeCompany = document.querySelector('.company');
-const activeAdmin = document.querySelector('.admin');
+const activePatientL = document.querySelector('.patient');
+const activeDoctorL = document.querySelector('.doctor');
+const activePharmacyL = document.querySelector('.pharmacy');
+const activeCompanyL = document.querySelector('.company');
+const activeAdminL = document.querySelector('.admin');
 
-const patientAC = document.querySelector('.login_patient');
-const doctorAC = document.querySelector('.login_doctor');
-const pharmacyAC = document.querySelector('.login_pharmacy');
-const companyAC = document.querySelector('.login_company');
-const adminAC = document.querySelector('.login_admin');
+const logWrapper = document.querySelector('.wrapper.login');
 
-activePatient.addEventListener('click', ()=> {
-    patientAC.classList.add('active');
-    pharmacyAC.classList.remove('active');
-    doctorAC.classList.remove('active');
-    companyAC.classList.remove('active');
-    adminAC.classList.remove('active');
+
+const patientACL = document.querySelector('.login_patient');
+const doctorACL = document.querySelector('.login_doctor');
+const pharmacyACL = document.querySelector('.login_pharmacy');
+const companyACL = document.querySelector('.login_company');
+const adminACL = document.querySelector('.login_admin');
+
+activePatientL.addEventListener('click', ()=> {
+    patientACL.classList.add('active');
+    pharmacyACL.classList.remove('active');
+    doctorACL.classList.remove('active');
+    companyACL.classList.remove('active');
+    adminACL.classList.remove('active');
 })
 
-activeDoctor.addEventListener('click', ()=> {
-  doctorAC.classList.add('active');
-  patientAC.classList.remove('active');
-  pharmacyAC.classList.remove('active');
-  companyAC.classList.remove('active');
-  adminAC.classList.remove('active');
+activeDoctorL.addEventListener('click', ()=> {
+  doctorACL.classList.add('active');
+  patientACL.classList.remove('active');
+  pharmacyACL.classList.remove('active');
+  companyACL.classList.remove('active');
+  adminACL.classList.remove('active');
 })
 
-activePharmacy.addEventListener('click', ()=> {
-  pharmacyAC.classList.add('active');
-  patientAC.classList.remove('active');
-  doctorAC.classList.remove('active');
-  companyAC.classList.remove('active');
-  adminAC.classList.remove('active');
+activePharmacyL.addEventListener('click', ()=> {
+  pharmacyACL.classList.add('active');
+  patientACL.classList.remove('active');
+  doctorACL.classList.remove('active');
+  companyACL.classList.remove('active');
+  adminACL.classList.remove('active');
 })
 
-activeCompany.addEventListener('click', ()=> {
-  companyAC.classList.add('active');
-  patientAC.classList.remove('active');
-  pharmacyAC.classList.remove('active');
-  doctorAC.classList.remove('active');
-  adminAC.classList.remove('active');
+activeCompanyL.addEventListener('click', ()=> {
+  companyACL.classList.add('active');
+  patientACL.classList.remove('active');
+  pharmacyACL.classList.remove('active');
+  doctorACL.classList.remove('active');
+  adminACL.classList.remove('active');
 })
 
-activeAdmin.addEventListener('click', ()=> {
-  adminAC.classList.add('active');
-  patientAC.classList.remove('active');
-  pharmacyAC.classList.remove('active');
-  doctorAC.classList.remove('active');
-  companyAC.classList.remove('active');
+activeAdminL.addEventListener('click', ()=> {
+  adminACL.classList.add('active');
+  patientACL.classList.remove('active');
+  pharmacyACL.classList.remove('active');
+  doctorACL.classList.remove('active');
+  companyACL.classList.remove('active');
+})
+
+
+
+//Handling registration for different users
+const activePatientR = document.querySelector('.patient');
+const activeDoctorR = document.querySelector('.doctor');
+const activePharmacyR = document.querySelector('.pharmacy');
+const activeCompanyR = document.querySelector('.company');
+
+const regWrapper = document.querySelector('.wrapper');
+
+const patientACR = document.querySelector('.register_patient');
+const doctorACR = document.querySelector('.register_doctor');
+const pharmacyACR = document.querySelector('.register_pharmacy');
+const companyACR = document.querySelector('.register_company');
+
+activePatientR.addEventListener('click', ()=> {
+    patientACR.classList.add('active');
+    pharmacyACR.classList.remove('active');
+    doctorACR.classList.remove('active');
+    companyACR.classList.remove('active');
+    adminACL.classList.remove('active');
+})
+
+activeDoctorR.addEventListener('click', ()=> {
+  doctorACR.classList.add('active');
+  patientACR.classList.remove('active');
+  pharmacyACR.classList.remove('active');
+  companyACR.classList.remove('active');
+  adminACL.classList.remove('active');
+})
+
+activePharmacyL.addEventListener('click', ()=> {
+  pharmacyACR.classList.add('active');
+  patientACR.classList.remove('active');
+  doctorACR.classList.remove('active');
+  companyACR.classList.remove('active');
+  adminACL.classList.remove('active');
+})
+
+activeCompanyR.addEventListener('click', ()=> {
+  companyACR.classList.add('active');
+  patientACR.classList.remove('active');
+  pharmacyACR.classList.remove('active');
+  doctorACR.classList.remove('active');
+  adminACL.classList.remove('active');
 })
