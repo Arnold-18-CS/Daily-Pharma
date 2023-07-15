@@ -10,6 +10,39 @@
 </head>
 <body class="Register">
 
+            <!--Header-->
+    <section>
+        <header class="item">
+            <div class="logo">
+                <a href="index.html">DailyPharma</a>
+            </div>
+
+            <nav class= navbar id="navbar">
+                <a href="index.html">Home</a>
+                <a href="index.html#service">About Us</a>
+                <a href="index.html#feature">Features</a>
+                <a href="index.html#testimonials">Testimonials</a>
+                <a href="index.html#footer">Contact Us</a>
+                <a href="login.html" class="btn-login-popup" >Login</a>
+            </nav>
+
+            <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+            <div id="menu" onclick="toggleOverlay()">
+                <div id="menu-content">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#service">About Us</a>
+                    <a href="index.html#feature">Features</a>
+                    <a href="index.html#testimonials">Testimonials</a>
+                    <a href="index.html#footer">Contact Us</a>
+                    <a href="login.html">Login</a>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <!--Dynamic Register Form-->
+
     <div class="wrapper">
 
         <div class="title-text">
@@ -21,12 +54,12 @@
             <button class="doctor">Doctor</button>
             <button class="pharmacy">Pharmacy</button>
             <button class="company">Company</button>
-            <button class="admin">Admin</button>
+
         </div>
 
-        <div class="form register">
+        <div class="form">
 
-            <form action="" class="register_patient" method="post">
+            <form action="" class="register_patient active" method="post">
                 <div class="input-box">
                     <label >SSN</label>
                     <input type="text" name="" required>
@@ -59,9 +92,13 @@
                     <label>Confirm </label>
                     <input type="password" name="" required>
                 </div>
-    
+
+                <div class="link">
+                    Have an account? -> <a href="login.html">Login</a>
+                </div>
+
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="login.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
             <form action="" class="register_doctor" method="post">
@@ -93,9 +130,14 @@
                     <label>Confirm </label>
                     <input type="password" name="">
                 </div>
+
+                <div class="link">
+                    Have an account? -> <a href="login.html">Login</a>
+                </div>
+
     
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="login.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
             <form action="" class="register_pharmacy" method="post">
@@ -119,9 +161,14 @@
                     <label>Confirm </label>
                     <input type="password" name="">
                 </div>
-    
+
+                <div class="link">
+                    Have an account? -> <a href="login.html">Login</a>
+                </div>
+
+
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="login.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
             <form action="" class="register_company" method="post">
@@ -141,9 +188,15 @@
                     <label>Confirm </label>
                     <input type="password" name="">
                 </div>
+
+                <div class="link">
+                
+                    Have an account? -> <a href="login.html">Login</a>
+                </div>
+
     
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="login.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
         </div>
