@@ -8,6 +8,7 @@
     
 }
 
+/* 
 body{
     min-height: 100vh; 
     display: flex;
@@ -16,13 +17,16 @@ body{
     align-items: center;
 }
 
+*/
+
 .item{
     margin-bottom: 100px;
+    margin-top: 100px;
 }
 
 
 /*--Header and menu--*/
-
+  
 header{
     position: fixed;
     top: 0;
@@ -37,6 +41,7 @@ header{
     backdrop-filter: blur(20px); 
     z-index: 3;
 }
+
 .logo{
     font-size: 2em;
     color: black;
@@ -78,7 +83,7 @@ nav a:not(:last-child)::after{
     content: '';
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 15px;
     width: 100%;
     height: 3px;
     transform-origin: right;
@@ -190,20 +195,18 @@ nav a:not(:last-child):hover::after{
 /*--Above the Fold Section--*/
 
 .above-fold{
-    background: url('bg3.jpg') no-repeat;
+    background: url('bg3.jpg');
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
-}
-
-
-.content{
-    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
 }
 
 @media screen and (max-width: 750px) {
     
-    .content{
+    .above-fold{
         margin-top: 100px;
     }
     
@@ -321,6 +324,7 @@ nav a:not(:last-child):hover::after{
 .title-text h1{
     font-size: 50px;
     margin-bottom: 50px;
+    height: 30px;
 }
 
 .feature-box{
@@ -690,7 +694,10 @@ hr{
     background: url(bg3.jpg) no-repeat;
     background-position: center;
     background-size: cover;
-    height: 120vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Login header, .Register header, .PatientView header{
@@ -722,7 +729,6 @@ hr{
     border-radius: 20px;
     box-shadow: 0 10px 20px 0px;
     padding-bottom: 100px;
-    top: 130px;
     overflow: hidden; 
 }
 
@@ -730,7 +736,7 @@ hr{
     display: flex;
     flex-direction: row;
     flex-basis: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 30px;
 }
 
@@ -881,8 +887,9 @@ label.left{
 /*Register Section*/
 
 .Register .wrapper{
-    height: 750px;
+    height: 350px;
     transition: .5s;
+    top: -7%;
 }
 
 .Register{
@@ -916,13 +923,10 @@ label.left{
 }
 
 
-/*Patients View*/
+/*Patients View */
 
 .PatientView{
-    background: url(bg4.jpg) no-repeat;
-    background-size:cover ;
-    background-position: center;
-    height: 100vh;
+    background-color: linear-gradient((255,255,255,0.5), #0ea83d);
 }
 
 .PatientView header{
@@ -935,23 +939,29 @@ label.left{
 }
 
 .profile{
-    padding: 7px;
-    border: 1px solid black;
-    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px ;
+    width: 150px;
 }
 
 .profile a i{
     font-size: 20px;
-    margin-right: 5px;
 }
 
 .profile a{
+    padding: 7px;
+    border: 1px solid black;
+    border-radius: 5px;
     text-decoration: none;
     color: black;
     font-weight: 500;
     font-size: 1.2em;
+    transition: .7s ease;
 }
 
+.profile a:hover{
+    background-color: #ccc;
+}
 @media screen and (max-width:1100px){
     .navbar{
         display: none;
@@ -963,33 +973,217 @@ label.left{
 }
 
 
-
-#inquiries{
-    margin-top: 65cm;
-    padding-top: 100px;
+/* Above Fold */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: url('slide-1.jpg') no-repeat , linear-gradient(#019587, #fff);
+    background-position: center;
 }
 
-.form .col-form-label{
+.Overlay-image{
+    width: 96%;
+    height: 100%;
+    margin-left: 25px;
+    margin-right: 25px;
+    top: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    background: linear-gradient(rgba(0,0,0,0.3),#009688);
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.image-container:hover .Overlay-image{
+    opacity: 1;
+}
+
+.content{
+    transform: translateY(-300px);
+}
+  
+.image-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.image-desc {
+    display: none;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+}
+
+.image-desc.active {
+    display: block;
+}
+  
+.arrow-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.arrow-buttons .uil {
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+/* Search Bar */
+  
+.search-container, .select-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+  
+.search-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    outline: none;
+}
+
+.search-container input:focus{
+    outline: none;
+    border-color: #0ea83d;
+    box-shadow: 0 0 10px #0ea83d;
+}
+  
+.search-container button {
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500 ;
+}
+
+.search-container button:hover{
+    background-color: #ccc;
+}
+
+.select-container label{
+    margin-right: 20px;
+    font-size: 20px;
     font-weight: 500;
 }
 
-.form-control:focus {
+.select-container select{
+    width: 30%;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.select-container select:focus{
     outline: none;
     border-color: #0ea83d;
     box-shadow: 0 0 10px #0ea83d;
 }
 
+/* Drugs */
+.drug_section{
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: rgba(12, 255, 85, 0.266);
+}
+
+.sidebar {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 20px;
+}
+  
+.category-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.category-item {
+    cursor: pointer;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+  
+.category-item:hover {
+    background-color: #dcdcdc;
+}
+  
+.category-item.active {
+    background-color: #ccc;
+}
+  
+.main_content {
+    margin-left: 250px;
+}
+  
+.category-content {
+    display: none;
+    width: 100%;
+}
+  
+.category-content.active {
+    display: flex;
+    flex-direction: row;
+}
+
+.category-content.active .row{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+} 
+
+.category-content.active .row .med{
+    padding: 20px;
+
+}
+
+#inquiries{
+padding: 100px;
+}
+
+.form .col-form-label{
+font-weight: 500;
+}
+
+.form-control:focus {
+outline: none;
+border-color: #0ea83d;
+box-shadow: 0 0 10px #0ea83d;
+}
+
 .btn-primary{
-    background-color: black;
-    outline: none;
+background-color: black;
+outline: none;
 }
 
 .btn-primary:hover{
-    background-color: white;
-    color: black;
-    border: 2px solid black;
+background-color: white;
+color: black;
+border: 2px solid black;
 }
-
-
-
-

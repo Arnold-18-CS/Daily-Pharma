@@ -12,47 +12,178 @@
 <body class="PatientView">
 
     <!--Header-->
-    <section class="item">
-        <header class="item">
-            <div class="logo">
-                <a href="index.html">DailyPharma</a>
-            </div>
+    <header>
+        <div class="logo">
+            <a href="index.html">DailyPharma</a>
+        </div>
 
-            <div class="navbar">
-                <nav class= navbar id="navbar">
-                    <a href="index.html">Home</a>
-                    <a href="#feature">Features</a>
-                    <a href="#inquiries">Medical Inquiries</a>
-                    <a href="#footer">Contact Us</a>
-                    <a href="login.html" class="btn-login-popup" >Logout</a>
-                    
+        <div class="navbar">
+            <nav class= navbar id="navbar">
+                <a href="index.html">Home</a>
+                <a href="#feature">Features</a>
+                <a href="#inquiries">Medical Inquiries</a>
+                <a href="#footer">Contact Us</a>
+                <a href="login.html" class="btn-login-popup" >Logout</a>                
+                </nav>
                 </nav>
     
-                <div class="profile" >
-                    <a href="profile.html">
-                        <i class="uil uil-user"></i>Profile
-                    </a><!--Place username here-->
-                </div>
-
+            </nav>
+    
+            <div class="profile" >
+                <a href="profile.html">
+                    <i class="uil uil-user"></i>Profile
+                </a><!--Place username here-->
             </div>
 
-            <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
 
-            <div id="menu" onclick="toggleOverlay()">
-                <div id="menu-content">
-                    <a href="index.html">Home</a>
-                    <a href="#feature">Features</a>
-                    <a href="#inquiries">Inquiries</a>
-                    <a href="#footer">Contact Us</a>
-                    <a href="profile.html">Profile</a><!--Place username here-->
-                    <a href="login.html">Logout</a>
+        </div>
+
+        <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+        <div id="menu" onclick="toggleOverlay()">
+            <div id="menu-content">
+                <a href="index.html">Home</a>
+                <a href="#feature">Features</a>
+                <a href="#inquiries">Inquiries</a>
+                <a href="#footer">Contact Us</a>
+                <a href="profile.html">Profile</a><!--Place username here-->
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Above fold -->
+    <div class="image-container">
+        <div class="Overlay-image">
+        </div>
+        <div class="content">
+            <div class="image-slide">
+                <div class="image-desc active">
+                    <h2>View Doctor-Prescribed Medication</h2>
+                    <p>Manage and track your prescribed medications from your doctor.</p>
+                </div>
+                <div class="image-desc">
+                    <h2>Order Medications Online</h2>
+                    <p>Conveniently order your medications online from our partnered pharmacies.</p>
+                </div>
+                <div class="image-desc">
+                    <h2>Make Inquiries</h2>
+                    <p>Get professional advice and make inquiries to doctors and pharmacies.</p>
                 </div>
             </div>
-        </header>
-    </section>
+            <div class="arrow-buttons">
+                <div class="arrow-left"><i class="uil uil-angle-left-b"></i></div>
+                <div class="arrow-right"><i class="uil uil-angle-right-b"></i></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Drugs -->
+    <div class="item">
+        <div class="title-text">
+            <p>Drugs</p>
+            <h1>What are you looking for?</h1>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" placeholder="Search medications...">
+        <button type="submit">Search</button>
+    </div>
+
+    <div class="select-container">
+        <label for="">Available Drugs</label>
+        <select name="Cosmetics" id="Cosmetics">
+            <optgroup label="Cosmetics">
+                <option value="DB_Value">DB_Value</option>
+                <option value="DB_Value">DB_Value</option>
+            </optgroup>
+            <optgroup label="Antibiotics">
+                <option value="DB_Value">DB_Value</option>
+                <option value="DB_Value">DB_Value</option>
+            </optgroup>
+            <optgroup label="Painkillers">
+                <option value="DB_Value">DB_Value</option>
+                <option value="DB_Value">DB_Value</option>
+            </optgroup>
+            <optgroup label="Ointments">
+                <option value="DB_Value">DB_Value</option>
+                <option value="DB_Value">DB_Value</option>
+            </optgroup>
+            <optgroup label="Antidepressant">
+                <option value="DB_Value">DB_Value</option>
+                <option value="DB_Value">DB_Value</option>
+            </optgroup>
+            <optgroup label="Antifungals">
+                <option value="DB_Value">DB_Value</option>
+                <option value="DB_Value">DB_Value</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="drug_section">
+        <div class="sidebar">
+            <ul class="category-list">
+              <li class="category-item active" data-category="cosmetics">Cosmetics</li>
+              <li class="category-item" data-category="antibiotics">Antibiotics</li>
+              <li class="category-item" data-category="painkillers">Painkillers</li>
+              <li class="category-item" data-category="ointments">Ointments</li>
+              <li class="category-item" data-category="antidepressant">Antidepressant</li>
+              <li class="category-item" data-category="antifungals">Antifungals</li>
+            </ul>
+          </div>
+    
+          <div class="main_content">
+            <div class="category-content active" id="cosmetics">
+              <div class="row">
+                <div class="med">Cosmetic 1</div>
+                <div class="med">Cosmetic 2</div>
+                <div class="med">Cosmetic 3</div>
+                <div class="med">Cosmetic 4</div>
+              </div>
+              <div class="row">
+                <div class="med">Cosmetic 5</div>
+                <div class="med">Cosmetic 6</div>
+                <div class="med">Cosmetic 7</div>
+                <div class="med">Cosmetic 8</div>
+              </div>
+              <!-- Add more rows of cosmetics here -->
+            </div>
+            <div class="category-content" id="antibiotics">
+              <div class="row">
+                <div class="med">Antibiotic 1</div>
+                <div class="med">Antibiotic 2</div>
+                <div class="med">Antibiotic 3</div>
+                <div class="med">Antibiotic 4</div>
+              </div>
+              <div class="row">
+                <div class="med">Antibiotic 5</div>
+                <div class="med">Antibiotic 6</div>
+                <div class="med">Antibiotic 7</div>
+                <div class="med">Antibiotic 8</div>
+              </div>
+              <!-- Add more rows of antibiotics here -->
+            </div>
+            <div class="category-content" id="painkillers">
+              <!-- Content for Painkillers category -->
+            </div>
+            <div class="category-content" id="ointments">
+              <!-- Content for Ointments category -->
+            </div>
+            <div class="category-content" id="antidepressant">
+              <!-- Content for Antidepressant category -->
+            </div>
+            <div class="category-content" id="antifungals">
+              <!-- Content for Antifungals category -->
+            </div>
+          </div>
+    </div>
+      
+    <div class="item"></div>
 
     <!-- Inquiries Section -->
-    <section id="inquiries" class="item">
+    <section id="inquiries" class="med">
 
         <div class="title-text">
             <p>Inquries</p>
@@ -173,7 +304,11 @@
             <p>&copy; 2023 DailyPharma. All rights reserved.</p>
         </div>
     </section>
+
+
     <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <script src="script3.js"></script>
     
 </body>
 </html>
