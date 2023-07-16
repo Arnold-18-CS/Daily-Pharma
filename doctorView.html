@@ -85,104 +85,96 @@
     <div class="drug_section">
         <div class="sidebar">
             <ul class="category-list">
-                <li class="category-item active" data-category="Manage Patients">MANAGE PATIENTS</li>
-                <li class="category-item" data-category="Prescribe Drugs">PRESCRIBE DRUGS</li>
+                <li class="category-item active" data-category="Manage-Patients">MANAGE PATIENTS</li>
+                <li class="category-item" data-category="Prescribe-Drugs">PRESCRIBE DRUGS</li>
             </ul>
         </div>
 
         <div class="main_content">
-            <div class="container my-5">
-                <h2>List of Patients</h2>            
-                <br>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>SSN</th>       
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>D.O.B</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="category-content" id="Manage-Patients">
+                <div class="container my-5">
+                    <h2>List of Patients</h2>            
+                    <br>
+    
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>$row[Patient_SSN]</td>                
-                                <td>$row[Patient_Name]</td>
-                                <td>$row[Patient_Email]</td>
-                                <td>$row[Patient_Phone]</td>
-                                <td>$row[Patient_Ages]</td>
-                                <td>
-                                    <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
-                                </td>
+                                <th>SSN</th>       
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>D.O.B</th>
                             </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>$row[Patient_SSN]</td>                
+                                    <td>$row[Patient_Name]</td>
+                                    <td>$row[Patient_Email]</td>
+                                    <td>$row[Patient_Phone]</td>
+                                    <td>$row[Patient_Ages]</td>
+                                    <td>
+                                        <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="category-content" id="Prescribe-Drugs">
+                <div class="form">
+                    <form action="submit_prescription.php" method="post">
+                             
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="patient_ssn">Patient SSN</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="patient_ssn" name="patient_ssn" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="doctor_ssn">Doctor SSN</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="doctor_ssn" name="doctor_ssn" class="form-control" required>
+                            </div>
+                        </div>
+        
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="drug_name" name="drug_name" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="prescription_amt">Prescription Amount</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="prescription_amt" name="prescription_amt" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Dosage</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="prescription_dosage" name="prescription_dosage" required>
+                            </div>
+                        </div>
+        
+        
+                        <div class="row mb-3">
+                            <div class="offset-sm-3 col-sm-3 d-grid">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
     </div>
 
-    </div>    
-      
-    <div class="item"></div>
-
-    <!-- Inquiries Section -->
-    <section id="inquiries" class="med">
-
-        <div class="title-text">
-            <p>Inquries</p>
-            <h1>Do you have a medical question?</h1>
-        </div>
-
-        <div class="form">
-            <form method="post">
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Patient SSN</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="" value="" required>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Inquiry</label>
-                    <div class="col-sm-6">
-                        <textarea class="form-control" name="" id="" cols="30" rows="10" required>
-                        </textarea>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="" value="" required>
-                    </div>
-                </div>
-
-                <!-- To be chaged into a selection list -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Doctor</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="" value="" on>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Pharmacy</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="" value="" on>
-                    </div>
-                </div>
-
-
-                <div class="row mb-3">
-                    <div class="offset-sm-3 col-sm-3 d-grid">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                    <div class="col-sm-3 d-grid">
-                        <a class="btn btn-outline-primary" href="/users/patientindex.php" role="button">Cancel</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-    </section>
 
     <!--Footer-->
     <section id="footer">
@@ -252,7 +244,7 @@
 
     <script src="script.js"></script>
     <script src="script1.js"></script>
-    <script src="script3.js"></script>
+    <script src="script4.js"></script>
     
 </body>
 </html>
