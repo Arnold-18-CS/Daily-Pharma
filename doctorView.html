@@ -79,70 +79,50 @@
             <p>Features</p>
             <h1>What do you need?</h1>
         </div>
-    </div>
 
-    <div class="search-container">
-        <input type="text" placeholder="Search medications...">
-        <button type="submit">Search</button>
     </div>
 
     <div class="drug_section">
         <div class="sidebar">
             <ul class="category-list">
-              <li class="category-item active" data-category="cosmetics">Cosmetics</li>
-              <li class="category-item" data-category="antibiotics">Antibiotics</li>
-              <li class="category-item" data-category="painkillers">Painkillers</li>
-              <li class="category-item" data-category="ointments">Ointments</li>
-              <li class="category-item" data-category="antidepressant">Antidepressant</li>
-              <li class="category-item" data-category="antifungals">Antifungals</li>
+                <li class="category-item active" data-category="Manage Patients">MANAGE PATIENTS</li>
+                <li class="category-item" data-category="Prescribe Drugs">PRESCRIBE DRUGS</li>
             </ul>
-          </div>
-    
-          <div class="main_content">
-            <div class="category-content active" id="cosmetics">
-              <div class="row">
-                <div class="med">Cosmetic 1</div>
-                <div class="med">Cosmetic 2</div>
-                <div class="med">Cosmetic 3</div>
-                <div class="med">Cosmetic 4</div>
-              </div>
-              <div class="row">
-                <div class="med">Cosmetic 5</div>
-                <div class="med">Cosmetic 6</div>
-                <div class="med">Cosmetic 7</div>
-                <div class="med">Cosmetic 8</div>
-              </div>
-              <!-- Add more rows of cosmetics here -->
+        </div>
+
+        <div class="main_content">
+            <div class="container my-5">
+                <h2>List of Patients</h2>            
+                <br>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SSN</th>       
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>D.O.B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>$row[Patient_SSN]</td>                
+                                <td>$row[Patient_Name]</td>
+                                <td>$row[Patient_Email]</td>
+                                <td>$row[Patient_Phone]</td>
+                                <td>$row[Patient_Ages]</td>
+                                <td>
+                                    <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="category-content" id="antibiotics">
-              <div class="row">
-                <div class="med">Antibiotic 1</div>
-                <div class="med">Antibiotic 2</div>
-                <div class="med">Antibiotic 3</div>
-                <div class="med">Antibiotic 4</div>
-              </div>
-              <div class="row">
-                <div class="med">Antibiotic 5</div>
-                <div class="med">Antibiotic 6</div>
-                <div class="med">Antibiotic 7</div>
-                <div class="med">Antibiotic 8</div>
-              </div>
-              <!-- Add more rows of antibiotics here -->
-            </div>
-            <div class="category-content" id="painkillers">
-              <!-- Content for Painkillers category -->
-            </div>
-            <div class="category-content" id="ointments">
-              <!-- Content for Ointments category -->
-            </div>
-            <div class="category-content" id="antidepressant">
-              <!-- Content for Antidepressant category -->
-            </div>
-            <div class="category-content" id="antifungals">
-              <!-- Content for Antifungals category -->
-            </div>
-          </div>
+        </div>
     </div>
+
+    </div>    
       
     <div class="item"></div>
 
