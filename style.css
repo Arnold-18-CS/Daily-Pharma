@@ -878,7 +878,10 @@ hr{
 .btn-outline-primary{
     color: black;
     border: none;
+    margin-bottom: 15px;
 }
+
+.btn
 
 label.left{
     left: -80px;
@@ -1174,6 +1177,8 @@ box-shadow: 0 0 10px #0ea83d;
 .btn-primary{
 background-color: black;
 outline: none;
+margin-bottom: 15px;
+
 }
 
 .btn-primary:hover{
@@ -1220,4 +1225,20 @@ border: 2px solid black;
 
 .DoctorView .main_content {
     margin-left: 50px;
+}
+
+.CompanyView .image-container{
+    background-image: url(pharma-home.jpg);
+    zoom: 1.5;
+}
+
+#Manage-Drugs{
+    position: relative;
+    left: -400px;
+    top: -20%;
+}
+
+#Manage-Contracts{
+    position: relative;
+    top: -20%;
 }
