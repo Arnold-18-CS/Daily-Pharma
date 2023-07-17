@@ -87,96 +87,77 @@
         </div>
     </div>
 
-    <div class="search-container">
-        <input type="text" placeholder="Search medications...">
-        <button type="submit">Search</button>
-    </div>
-
-    <div class="select-container">
-        <label for="">Available Drugs</label>
-        <select name="Cosmetics" id="Cosmetics">
-            <optgroup label="Cosmetics">
-                <option value="DB_Value">DB_Value</option>
-                <option value="DB_Value">DB_Value</option>
-            </optgroup>
-            <optgroup label="Antibiotics">
-                <option value="DB_Value">DB_Value</option>
-                <option value="DB_Value">DB_Value</option>
-            </optgroup>
-            <optgroup label="Painkillers">
-                <option value="DB_Value">DB_Value</option>
-                <option value="DB_Value">DB_Value</option>
-            </optgroup>
-            <optgroup label="Ointments">
-                <option value="DB_Value">DB_Value</option>
-                <option value="DB_Value">DB_Value</option>
-            </optgroup>
-            <optgroup label="Antidepressant">
-                <option value="DB_Value">DB_Value</option>
-                <option value="DB_Value">DB_Value</option>
-            </optgroup>
-            <optgroup label="Antifungals">
-                <option value="DB_Value">DB_Value</option>
-                <option value="DB_Value">DB_Value</option>
-            </optgroup>
-        </select>
-    </div>
 
     <div class="drug_section">
         <div class="sidebar">
             <ul class="category-list">
-              <li class="category-item active" data-category="cosmetics">Cosmetics</li>
-              <li class="category-item" data-category="antibiotics">Antibiotics</li>
-              <li class="category-item" data-category="painkillers">Painkillers</li>
-              <li class="category-item" data-category="ointments">Ointments</li>
-              <li class="category-item" data-category="antidepressant">Antidepressant</li>
-              <li class="category-item" data-category="antifungals">Antifungals</li>
+              <li class="category-item active" data-category="Order-Drugs">ORDER DRUGS</li>
+              <li class="category-item" data-category="View-Presciptions">VIEW PRESCRIPTIONS</li>
             </ul>
           </div>
     
           <div class="main_content">
-            <div class="category-content active" id="cosmetics">
-              <div class="row">
-                <div class="med">Cosmetic 1</div>
-                <div class="med">Cosmetic 2</div>
-                <div class="med">Cosmetic 3</div>
-                <div class="med">Cosmetic 4</div>
-              </div>
-              <div class="row">
-                <div class="med">Cosmetic 5</div>
-                <div class="med">Cosmetic 6</div>
-                <div class="med">Cosmetic 7</div>
-                <div class="med">Cosmetic 8</div>
-              </div>
-              <!-- Add more rows of cosmetics here -->
+            <div class="category-content" id="Order-Drugs">
+<!--                 <div class="search-container">
+                    <input type="text" placeholder="Search medications...">
+                    <button type="submit">Search</button>
+                </div> -->
+            
+                <div class="select-container">
+                    <label for="availableDrugs">Available Drugs</label>
+                    <select name="availableDrugs" id="availableDrugs">
+                      <optgroup label="Cosmetics">
+                        <option value="Cosmetic 1">Cosmetic 1</option>
+                        <option value="Cosmetic 2">Cosmetic 2</option>
+                      </optgroup>
+                      <optgroup label="Antibiotics">
+                        <option value="Antibiotic 1">Antibiotic 1</option>
+                        <option value="Antibiotic 2">Antibiotic 2</option>
+                      </optgroup>
+                      <!-- Add more optgroups and options for other drug categories -->
+                    </select>
+                  </div>
+                  
+                  <div id="drugInfo" style="display: none;">
+                    <h2>Drug Information</h2>
+                    <p id="drugName"></p>
+                    <p id="drugPrice"></p>
+                    <p>
+                        <a class="btn btn-primary" href="#" role="button">Place Order</a>
+                    </p>
+                  </div>                  
             </div>
-            <div class="category-content" id="antibiotics">
-              <div class="row">
-                <div class="med">Antibiotic 1</div>
-                <div class="med">Antibiotic 2</div>
-                <div class="med">Antibiotic 3</div>
-                <div class="med">Antibiotic 4</div>
-              </div>
-              <div class="row">
-                <div class="med">Antibiotic 5</div>
-                <div class="med">Antibiotic 6</div>
-                <div class="med">Antibiotic 7</div>
-                <div class="med">Antibiotic 8</div>
-              </div>
-              <!-- Add more rows of antibiotics here -->
+
+            <div class="category-content" id="View-Presciptions">
+                <div class="container my-5">
+                    <h2>Pending Prescription</h2> 
+                    <p>Please Pick Up Your Presciptions</p>
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Prescription ID</th>
+                                    <th>Patient SSN</th>
+                                    <th>Doctor SSN</th>
+                                    <th>Drug Name</th>
+                                    <th>Prescription Amount</th>
+                                    <th>Prescription Dosage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>               
+                                        <td>$row["Prescription_ID"]</td>            
+                                        <td>$row["Patient_SSN"]</td>
+                                        <td>$row["Doctor_SSN"]</td>
+                                        <td>$row["Drug_Name"]</td>
+                                        <td>$row["Prescription_Amt"]</td>
+                                        <td>$row["Prescription_Dosage"]</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                </div>
             </div>
-            <div class="category-content" id="painkillers">
-              <!-- Content for Painkillers category -->
-            </div>
-            <div class="category-content" id="ointments">
-              <!-- Content for Ointments category -->
-            </div>
-            <div class="category-content" id="antidepressant">
-              <!-- Content for Antidepressant category -->
-            </div>
-            <div class="category-content" id="antifungals">
-              <!-- Content for Antifungals category -->
-            </div>
+
           </div>
     </div>
       
@@ -308,7 +289,8 @@
 
     <script src="script.js"></script>
     <script src="script1.js"></script>
-    <script src="script3.js"></script>
+    <script src="script4.js"></script>
+    <script src="script5.js"></script>
     
 </body>
 </html>

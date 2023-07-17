@@ -1,16 +1,25 @@
-// Get the necessary elements
 const categoryItems = document.querySelectorAll('.category-item');
-const categoryContent = document.querySelectorAll('.category-content');
+const categoryContents = document.querySelectorAll('.category-content');
 
-// Function to show the content of the selected category
-function showCategoryContent(category) {
-  categoryContent.forEach((content) => {
-    content.classList.remove('active');
+categoryItems.forEach((item) => {
+  item.addEventListener('click', function () {
+    const selectedCategory = this.getAttribute('data-category');
+
+    // Hide all category contents
+    categoryContents.forEach((content) => {
+      content.classList.remove('show');
+    });
+
+    // Show the selected category content
+    const selectedContent = document.querySelector(
+      `.category-content[data-category="${selectedCategory}"]`
+    );
+    selectedContent.classList.add('show');
   });
+});
 
-  const selectedContent = document.getElementById(category);
-  selectedContent.classList.add('active');
-}
+
+
 
 // Function to handle category item click
 function handleCategoryClick(event) {
