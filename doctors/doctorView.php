@@ -14,6 +14,7 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 // Get the user information from the session variables
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
+$ID = $_SESSION["user"]["Doctor_SSN"];
 
 ?>
 
@@ -121,20 +122,40 @@ $user = $_SESSION["user"];
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>D.O.B</th>
+                                <th>Gender</th>
+                                <th>Age</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                                <tr>
-                                    <td>$row[Patient_SSN]</td>                
-                                    <td>$row[Patient_Name]</td>
-                                    <td>$row[Patient_Email]</td>
-                                    <td>$row[Patient_Phone]</td>
-                                    <td>$row[Patient_Ages]</td>
-                                    <td>
-                                        <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
-                                    </td>
-                                </tr>
+
+                            <?php
+                            require_once("../connect.php");                     
+                            $ID = 47;
+
+                            $result = $conn->query("
+                            SELECT p.Patient_SSN, p.Patient_Name, p.Patient_Email, p.Patient_Phone, p.Patient_Gender, p.Patient_Age
+                            FROM patients p
+                            INNER JOIN doctor_patient dp ON p.Patient_SSN = dp.Patient_SSN
+                            WHERE dp.Doctor_SSN = '$ID' AND p.status = 'active'");
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                    echo "<td>" . $row["Patient_Name"] . "</td>";
+                                    echo "<td>" . $row["Patient_Email"] . "</td>";
+                                    echo "<td>" . $row["Patient_Phone"] . "</td>";
+                                    echo "<td>" . $row["Patient_Gender"] . "</td>";
+                                    echo "<td>" . $row["Patient_Age"] . "</td>";
+                                    echo "<td>";
+                                    echo "<a class='btn btn-danger btn-sm' href='confirmDeletePatient.php?id=" . $row["Patient_SSN"] . "'>Delete</a>";
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            ?>
+
                         </tbody>
                     </table>
                 </div>

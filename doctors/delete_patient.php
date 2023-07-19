@@ -1,0 +1,31 @@
+<?php
+if (isset($_GET["id"]) && isset($_GET["patientID"])) {
+    $doctorID = $_GET["id"];
+    $patientID = $_GET["patientID"];
+
+    require_once("connect.php");
+    $sql = "SELECT * FROM doctor_patient WHERE Doctor_SSN = '$doctorID' AND Patient_SSN = '$patientID'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $deleteQuery = "DELETE FROM doctor_patient WHERE Doctor_SSN = '$doctorID' AND Patient_SSN = '$patientID'";
+
+        if ($conn->query($deleteQuery) === TRUE) {
+            header("Location: doctorView.php?status=success");
+            exit;
+        } else {
+            header("Location: doctorView.php?status=error");
+            exit;
+        }
+    } else {
+        echo "<script>
+            alert('Error occured during deletion. Please contact administrator.')
+            window.location.href = 'doctorView.php';
+            exit;
+            </script>";
+    }
+} else {
+    header("Location: doctorView.php");
+    exit;
+}
+?>

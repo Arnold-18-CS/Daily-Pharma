@@ -85,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   `Doctor_Phone` INT(20) NOT NULL,
   `Doctor_Speciality` VARCHAR(20) NOT NULL,
   `Doctor_Experience` INT(3) NOT NULL,
-  `Doctor_Patient` INT(10),
   `Password` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`Doctor_SSN`)
 
@@ -107,6 +106,35 @@ VALUES
 (45, 'Dr. Jessica', 1112223333, 'Gastroenterology', 7, 'password8'),
 (46, 'Dr. Andrew', 147483647, 'Psychiatry', 9, 'password9'),
 (47, 'Dr. James', 12103923, 'Family Medicine', 12, 'password10');
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_patient`
+--
+CREATE TABLE doctor_patient (
+    Doctor_SSN INT NOT NULL,
+    Patient_SSN INT NOT NULL,
+    PRIMARY KEY (Doctor_SSN, Patient_SSN),
+    FOREIGN KEY (Doctor_SSN) REFERENCES doctors (Doctor_SSN),
+    FOREIGN KEY (Patient_SSN) REFERENCES patients (Patient_SSN)
+);
+
+INSERT INTO doctor_patient (Doctor_ID, Patient_ID)
+VALUES
+    (47, 27),
+    (47, 28),
+    (47, 29),
+    (47, 30),
+    (47, 31),
+    (47, 32),
+    (47, 33),
+    (42, 34),
+    (42, 35);
+
+
+
 
 -- --------------------------------------------------------
 
