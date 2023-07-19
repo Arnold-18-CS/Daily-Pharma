@@ -4,7 +4,7 @@
 session_start();
 
 //establish a connection
-require_once("connect.php");
+require_once("../connect.php");
 
 //creating a variable to hold errors that may occur uppon login
 $error = '';
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $conn->close();
             
                     // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: companyView.php");
+                    header("Location: ../company/companyView.php");
                     exit;
                 } else {
                     $error .= 'The password is not valid.';
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Check if there is an error, and if so, display an alert
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = 'login.html';</script>";
+    echo "<script>window.location.href = '../login.html';</script>";
     exit;
 }
 

@@ -55,9 +55,8 @@
             <button class="admin">Admin</button>
         </div>
 
-        <div class="form login">
-
-            <form action="loginDoctor.php" class="login_doctor" method="post">
+        <div class="form">
+            <form action="/doctors/loginDoctor.php" class="login_doctor" method="post">
                 <div class="input-box">
                 <label>Doctor SSN</label>
                 <input type="text" name="Doctor_SSN" required>
@@ -73,13 +72,13 @@
                 </div>
 
                 <div class="link">
-                    No account? -> <a class="login-register" href="register.html">Register</a>
+                    No account? -> <a class="login-register" href="register.php">Register</a>
                 </div>
 
                 <button class="loginbtn" type="submit">Login</button>
             </form>
             
-            <form action="loginPatient.php" class="login_patient" method="post">
+            <form action="/patients/loginPatient.php" class="login_patient" method="post">
                 <div class="input-box">
                     <label >Patient SSN</label>
                     <input type="text" name="Patient_SSN">
@@ -94,14 +93,13 @@
                 </div>
 
                 <div class="link">
-                    No account? -> <a class="login-register" href="register.html">Register</a>
+                    No account? -> <a class="login-register" href="register.php">Register</a>
                 </div>
 
                 <input class="loginbtn" type="submit" value="Login">
             </form>
 
-        
-            <form action="loginPharmacy.php" class="login_pharmacy" method="post">
+            <form action="/pharmacy/loginPharmacy.php" class="login_pharmacy" method="post">
 
                 <div class="input-box">
                 <label>Pharmacy ID</label>
@@ -118,13 +116,13 @@
                 </div>
 
                 <div class="link">
-                    No account? -> <a class="login-register" href="register.html">Register</a>
+                    No account? -> <a class="login-register" href="register.php">Register</a>
                 </div>
 
                 <button class="loginbtn" type="submit">Login</button>
             </form>
 
-            <form action="loginCompany.php" class="login_company" method="post">
+            <form action="/company/loginCompany.php" class="login_company" method="post">
 
                 <div class="input-box">
                 <label>Company ID</label>
@@ -141,13 +139,13 @@
                 </div>
 
                 <div class="link">
-                    No account? -> <a class="login-register" href="register.html">Register</a>
+                    No account? -> <a class="login-register" href="register.php">Register</a>
                 </div>
 
                 <button class="loginbtn" type="submit">Login</button>
             </form>
 
-            <form action="loginAdmin.php" class="login_admin" method="post">
+            <form action="/admin/loginAdmin.php" class="login_admin" method="post">
 
                 <div class="input-box">
                 <label>Admin ID</label>

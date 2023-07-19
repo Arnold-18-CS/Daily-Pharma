@@ -55,7 +55,7 @@
         </div>
 
         <div class="form">
-            <form action="registerPatient.php" class="register_patient" method="post" name="register_patient">
+            <form action="/patients/registerPatient.php" class="register_patient" method="post" name="register_patient">
                 <div class="input-box">
                     <label >SSN</label>
                     <input type="text" name="Patient_SSN" required>
@@ -101,10 +101,10 @@
                 </div>
                 
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.php" role="button">Cancel</a>
             </form>
     
-            <form action="registerDoctor.php" class="register_doctor" method="post" name="register_doctor">
+            <form action="/doctors/registerDoctor.php" class="register_doctor" method="post" name="register_doctor">
                 <div class="input-box">
                     <label >SSN</label>
                     <input type="text" name="Doctor_SSN" required>
@@ -139,10 +139,10 @@
                     Have an account? -> <a href="login.html">Login</a>
                 </div>
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.php" role="button">Cancel</a>
             </form>
     
-            <form action="registerPharmacy.php" class="register_pharmacy" method="post" name="register_pharmacy">
+            <form action="/pharmacy/registerPharmacy.php" class="register_pharmacy" method="post" name="register_pharmacy">
                 <div class="input-box">
                     <label>Name</label>
                     <input type="text" name="Pharmacy_Name">
@@ -173,10 +173,10 @@
                     Have an account? -> <a href="login.html">Login</a>
                 </div>
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.php" role="button">Cancel</a>
             </form>
     
-            <form action="registerCompany.php" class="register_company" method="post" name="register_company">
+            <form action=".company/registerCompany.php" class="register_company" method="post" name="register_company">
                 <div class="input-box">
                     <label>Name</label>
                     <input type="text" name="Company_Name">
@@ -202,7 +202,7 @@
                     Have an account? -> <a href="login.html">Login</a>
                 </div>
                 <button type="submit" class="registerbtn">Register</button>
-                <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
+                <a class="btn btn-outline-primary" href="register.php" role="button">Cancel</a>
             </form>
         </div>
     </div>

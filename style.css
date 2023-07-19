@@ -195,7 +195,7 @@ nav a:not(:last-child):hover::after{
 /*--Above the Fold Section--*/
 
 .above-fold{
-    background: url('bg3.jpg');
+    background: url('images/bg3.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -701,7 +701,7 @@ hr{
 /*--Login Page--*/
 
 .Login, .Register{
-    background: url(bg3.jpg) no-repeat;
+    background: url(images/bg3.jpg) no-repeat;
     background-position: center;
     background-size: cover;
     height: 100vh;
@@ -771,7 +771,7 @@ hr{
 
 /*Login Section*/
 
-.form.login{
+.form{
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -985,7 +985,7 @@ label.left{
     width: 100%;
     height: 650px;
     overflow: hidden;
-    background: url('slide-1.jpg') no-repeat;
+    background: url('images/slide-1.jpg') no-repeat;
     zoom: 1.3;
     background-position: center;
 }
@@ -1201,7 +1201,7 @@ border: 2px solid black;
 
 
 .DoctorView .image-container{
-    background-image: url(slide-2.jpg);
+    background-image: url(images/slide-2.jpg);
     zoom: .65;
     height: 1200px;
 }
@@ -1240,7 +1240,7 @@ border: 2px solid black;
 }
 
 .CompanyView .image-container{
-    background-image: url(pharma-home.jpg);
+    background-image: url(images/pharma-home.jpg);
     zoom: 1.3;
 }
 

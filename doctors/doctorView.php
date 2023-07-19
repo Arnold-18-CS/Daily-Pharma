@@ -7,7 +7,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
     // Redirect to the login page if the user is not logged in
-    header("Location: login.html");
+    header("Location: ../login.html");
     exit;
 }
 
@@ -25,7 +25,7 @@ $user = $_SESSION["user"];
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title> DailyPharma - Doctor Home</title>
 </head>
 <body class="DoctorView">
@@ -33,20 +33,20 @@ $user = $_SESSION["user"];
     <!--Header-->
     <header>
         <div class="logo">
-            <a href="index.html">DailyPharma</a>
+            <a href="../index.html">DailyPharma</a>
         </div>
 
         <div class="navbar">
             <nav class= navbar id="navbar">
-                <a href="index.html">Home</a>
+                <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="logout.php" class="btn-login-popup">Logout</a>    
+                <a href="../logout.php" class="btn-login-popup">Logout</a>    
             </nav>
     
             <?php
                 echo '<div class="profile">';
-                echo '<a href="profile.html">';
+                echo '<a href="../profile.html">';
                 echo '<i class="uil uil-user"></i>' . $username . '';
                 echo '</a>';
                 echo '</div>';
@@ -57,11 +57,11 @@ $user = $_SESSION["user"];
 
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
-                <a href="index.html">Home</a>
+                <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="logout.php">Logout</a>
+                <a href="../profile.html">Profile</a><!--Place username here-->
+                <a href="../logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -242,9 +242,9 @@ $user = $_SESSION["user"];
                 <div class="quick-links">
                     <h1>Quick Links</h1>
                     <ul>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="#service">About Us</a></li>
-                      <li><a href="#feature">Features</a></li>
+                      <li><a href="../index.html">Home</a></li>
+                      <li><a href="../index.html#service">About Us</a></li>
+                      <li><a href="../index.html#feature">Features</a></li>
                       <li><a href="#">FAQ</a></li>
                       <li><a href="#">Privacy Policy</a></li>
                       <li><a href="#">Terms and Conditions</a></li>
@@ -259,9 +259,9 @@ $user = $_SESSION["user"];
     </section>
 
 
-    <script src="script.js"></script>
-    <script src="script1.js"></script>
-    <script src="script4.js"></script>
+    <script src="../script.js"></script>
+    <script src="../script1.js"></script>
+    <script src="../script4.js"></script>
     
 </body>
 </html>

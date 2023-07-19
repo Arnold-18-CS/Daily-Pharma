@@ -4,7 +4,7 @@
 session_start();
 
 // Establish a connection to the database
-require_once("connect.php");
+require_once("../connect.php");
 
 // Function to calculate age from date of birth
 function calculateAge($dob) {
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $query->bind_param('isssissss', $patientSSN, $patientName, $patientAddress, $patientEmail, $patientPhone, $patientGender, $patientDOB, $patientAge, $password);
         if ($query->execute()) {
             // Registration successful, redirect to login page
-            header("Location: login.html");
+            header("Location: ../login.html");
             exit;
         } else {
             $error = 'Error registering the user. Please try again later.';
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 if(!empty($error)){
     // Display the error message as an alert
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = 'register.php';</script>";
+    echo "<script>window.location.href = '../register.php';</script>";
     exit;
 }
 

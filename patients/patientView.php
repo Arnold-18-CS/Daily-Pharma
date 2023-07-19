@@ -9,7 +9,7 @@ require_once("connect.php");
 // Check if the user is logged in
 if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
     // Redirect to the login page if the user is not logged in
-    header("Location: login.html");
+    header("Location: ../login.html");
     exit;
 }
 
@@ -31,6 +31,7 @@ $drugInformation = array();
 while ($row = $query->fetch_assoc()) {
     $drugInformation[] = $row;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ while ($row = $query->fetch_assoc()) {
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title> DailyPharma - Patient Home</title>
 </head>
 <body class="PatientView">
@@ -49,22 +50,22 @@ while ($row = $query->fetch_assoc()) {
     <!--Header-->
     <header>
         <div class="logo">
-            <a href="index.html">DailyPharma</a>
+            <a href="../index.html">DailyPharma</a>
         </div>
 
         <div class="navbar">
             <nav class= navbar id="navbar">
-                <a href="index.html">Home</a>
+                <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#inquiries">Medical Inquiries</a>
                 <a href="#footer">Contact Us</a>
-                <a href="logout.php" class="btn-login-popup">Logout</a>
+                <a href="../logout.php" class="btn-login-popup">Logout</a>
             </nav>
 
 
             <?php
                 echo '<div class="profile">';
-                echo '<a href="profile.html">';
+                echo '<a href="../profile.html">';
                 echo '<i class="uil uil-user"></i>' . $username . '';
                 echo '</a>';
                 echo '</div>';
@@ -75,12 +76,12 @@ while ($row = $query->fetch_assoc()) {
 
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
-                <a href="index.html">Home</a>
+                <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#inquiries">Inquiries</a>
                 <a href="#footer">Contact Us</a>
-                <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="logout.php">Logout</a>
+                <a href="../profile.html">Profile</a><!--Place username here-->
+                <a href="../logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -131,10 +132,6 @@ while ($row = $query->fetch_assoc()) {
     
           <div class="main_content">
             <div class="category-content" id="Order-Drugs">
-<!--                 <div class="search-container">
-                    <input type="text" placeholder="Search medications...">
-                    <button type="submit">Search</button>
-                </div> -->
 
             <div class="select-container">
                 <label for="availableDrugs">Available Drugs</label>
@@ -301,9 +298,9 @@ while ($row = $query->fetch_assoc()) {
                 <div class="quick-links">
                     <h1>Quick Links</h1>
                     <ul>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="index.html#service">About Us</a></li>
-                      <li><a href="index.html#feature">Features</a></li>
+                      <li><a href="../index.html">Home</a></li>
+                      <li><a href="../index.html#service">About Us</a></li>
+                      <li><a href="../index.html#feature">Features</a></li>
                       <li><a href="#">FAQ</a></li>
                       <li><a href="#">Privacy Policy</a></li>
                       <li><a href="#">Terms and Conditions</a></li>
@@ -318,9 +315,9 @@ while ($row = $query->fetch_assoc()) {
     </section>
 
 
-    <script src="script.js"></script>
-    <script src="script1.js"></script>
-    <script src="script4.js"></script>
+    <script src="../script.js"></script>
+    <script src="../script1.js"></script>
+    <script src="../script4.js"></script>
     <script>
         const selectElement = document.getElementById("availableDrugs");
         const drugInfoDiv = document.getElementById("drugInfo");

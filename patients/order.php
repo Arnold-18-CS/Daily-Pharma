@@ -9,7 +9,7 @@ $patientSSN = $_SESSION["user"]["Patient_SSN"];
 $selectedDrug = $_SESSION['selected_drug'];
 
 echo "<script>alert('$username - Order for $selectedDrug has been placed. Address - $patientAddress');</script>";
-echo "<script>window.location.href = 'patientView.php';</script>";
+echo "<script>window.location.href = '../patients/patientView.php';</script>";
 
 
 ?>
