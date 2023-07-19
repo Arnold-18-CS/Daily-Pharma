@@ -5,25 +5,29 @@ require_once("connect.php");
 
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
-$ID = $_SESSION["user"]["Company_ID"];
+$ID = $_SESSION["user"]["Patient_SSN"];
 
 
 //read the row of the selected client from the database table 
-$sql = $conn->prepare("SELECT * FROM company WHERE `Company_ID` = ?");
+$sql = $conn->prepare("SELECT * FROM patients WHERE `Patient_SSN` = ?");
 $sql->bind_param("i", $ID);
 $sql->execute();
 $row = $sql->get_result()->fetch_assoc();
 
 if (!$row) {
-    header("location: companyView.php");
+    header("location: patientView.php");
     exit;
 }
 
 
-$ID = $row["Company_ID"];
-$name = $row["Company_Name"];
-$email = $row["Company_Email"];
-$phone = $row["Company_Phone"];
+$ID = $row["Patient_SSN"];
+$name = $row["Patient_Name"];
+$email = $row["Patient_Email"];
+$phone = $row["Patient_Phone"];
+$gender = $row["Patient_Gender"];
+$dob = $row["Patient_DOB"];
+$age = $row["Patient_Age"];
+
 ?>
 
 
@@ -51,7 +55,6 @@ $phone = $row["Company_Phone"];
                 <a href="#footer">Contact Us</a>
                 <a href="../logout.php" class="btn-login-popup" >Logout</a>                
             </nav>
-
         </div>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
@@ -65,35 +68,54 @@ $phone = $row["Company_Phone"];
             </div>
         </div>
     </header>
+
     <div class= "container my-5">
         <h2>User Information</h2>
         <div class="item"></div>
-
         <form method ="post">
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form label">ID</label>
+        <div class="row mb-3">
+                <label class="col-sm-3 col-form label">SSN</label>
                 <div class="col-sm-6">
-                <input type="number" name="Company_ID" value="<?php echo $ID; ?>" readonly>
+                    <input type="text" class="form-control" name="Patient_SSN" value="<?php echo $ID?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form label">Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Company_Name" value="<?php echo $name?>" readonly>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form label">Email</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Company_Email" value="<?php echo $email?>" readonly>
+                    <input type="text" class="form-control" name="Patient_Name" value="<?php echo $name?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form label">Phone</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Company_Phone" value="<?php echo $phone?>" readonly>
+                    <input type="text" class="form-control" name="Patient_Phone" value="<?php echo $phone?>" readonly>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form label">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Patient_Email" value="<?php echo $email?>" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form label">Gender</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Patient_Gender" value="<?php echo $gender?>" readonly >
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form label">DO</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Patient_DOB" value="<?php echo $dob?>"readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form label">Experience</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Patient_Age" value="<?php echo $age?>"readonly>
+                </div>
+            </div>
+
         </form>
     </div>
 </body>

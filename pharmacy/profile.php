@@ -5,25 +5,27 @@ require_once("connect.php");
 
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
-$ID = $_SESSION["user"]["Company_ID"];
+$ID = $_SESSION["user"]["Pharmacy_ID"];
 
 
 //read the row of the selected client from the database table 
-$sql = $conn->prepare("SELECT * FROM company WHERE `Company_ID` = ?");
+$sql = $conn->prepare("SELECT * FROM pharmacy WHERE `Pharmacy_ID` = ?");
 $sql->bind_param("i", $ID);
 $sql->execute();
 $row = $sql->get_result()->fetch_assoc();
 
 if (!$row) {
-    header("location: companyView.php");
+    header("location: pharmacyView.php");
     exit;
 }
 
 
-$ID = $row["Company_ID"];
-$name = $row["Company_Name"];
-$email = $row["Company_Email"];
-$phone = $row["Company_Phone"];
+$ID = $row["Pharmacy_ID"];
+$name = $row["Pharmacy_Name"];
+$email = $row["Pharmacy_Email"];
+$phone = $row["Pharmacy_Phone"];
+$address = $row["Pharmacy_Address"];
+
 ?>
 
 
@@ -51,7 +53,6 @@ $phone = $row["Company_Phone"];
                 <a href="#footer">Contact Us</a>
                 <a href="../logout.php" class="btn-login-popup" >Logout</a>                
             </nav>
-
         </div>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
@@ -65,35 +66,40 @@ $phone = $row["Company_Phone"];
             </div>
         </div>
     </header>
+
     <div class= "container my-5">
         <h2>User Information</h2>
         <div class="item"></div>
-
         <form method ="post">
-            <div class="row mb-3">
+        <div class="row mb-3">
                 <label class="col-sm-3 col-form label">ID</label>
                 <div class="col-sm-6">
-                <input type="number" name="Company_ID" value="<?php echo $ID; ?>" readonly>
+                    <input type="text" class="form-control" name="Pharmacy_ID" value="<?php echo $ID?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form label">Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Company_Name" value="<?php echo $name?>" readonly>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form label">Email</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Company_Email" value="<?php echo $email?>" readonly>
+                    <input type="text" class="form-control" name="Pharmacy_Name" value="<?php echo $name?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form label">Phone</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Company_Phone" value="<?php echo $phone?>" readonly>
+                    <input type="text" class="form-control" name="Pharmacy_Phone" value="<?php echo $phone?>" readonly>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form label">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Pharmacy_Email" value="<?php echo $email?>" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form label">Address</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Pharmacy_Address" value="<?php echo $address?>" readonly >
+                </div>
         </form>
     </div>
 </body>
