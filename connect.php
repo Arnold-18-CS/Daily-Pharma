@@ -1,9 +1,9 @@
 <?php
 
-define($servername, "localhost");
-define($username, "root");
-define($password, "");
-define($database, "dailyPharma");
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "dailyPharma";
 
 //create connection 
 $conn= new mysqli($servername, $username, $password, $database);

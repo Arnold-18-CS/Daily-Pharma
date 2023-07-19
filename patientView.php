@@ -12,7 +12,7 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 }
 
 // Get the user information from the session variables
-$patientSSN = $_SESSION["userid"];
+$username = $_SESSION["userid"];
 $user = $_SESSION["user"];
 
 ?>
@@ -42,7 +42,8 @@ $user = $_SESSION["user"];
                 <a href="#about">Features</a>
                 <a href="#inquiries">Medical Inquiries</a>
                 <a href="#footer">Contact Us</a>
-                <a href="login.html" class="btn-login-popup" >Logout</a>                
+                <a href="logout.php" class="btn-login-popup">Logout</a>
+
                 </nav>
                 </nav>
     
@@ -52,7 +53,7 @@ $user = $_SESSION["user"];
             <?php
                 echo '<div class="profile">';
                 echo '<a href="profile.html">';
-                echo '<i class="uil uil-user"></i>Profile (' . $patientSSN . ')';
+                echo '<i class="uil uil-user"></i>' . $username . '';
                 echo '</a>';
                 echo '</div>';
             ?>
@@ -67,7 +68,7 @@ $user = $_SESSION["user"];
                 <a href="#inquiries">Inquiries</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="login.html">Logout</a>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
     </header>

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 //tests if the entered password matches that in the database
                 if (hash_equals($password, $row['Password'])) {
-                    $_SESSION["userid"] = $row['Patient_SSN'];
+                    $_SESSION["userid"] = $row['Patient_Name'];
                     $_SESSION["user"] = $row;
             
                     //close them to prevent further action upon them
@@ -51,7 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Check if there is an error, and if so, display an alert
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
+    echo "<script>window.location.href = 'login.html';</script>";
+    exit;
 }
+
 
 /*
 if (!empty($error)) {
