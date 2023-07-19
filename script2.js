@@ -10,7 +10,7 @@ const pharmacyACR = document.querySelector('.register_pharmacy');
 const companyACR = document.querySelector('.register_company');
 
 activePatientR.addEventListener('click', ()=> {
-    wrapper.style.height = "750px";
+    wrapper.style.height = "800px";
     patientACR.classList.add('active');
     pharmacyACR.classList.remove('active');
     doctorACR.classList.remove('active');
@@ -27,7 +27,7 @@ activeDoctorR.addEventListener('click', ()=> {
 })
 
 activePharmacyR.addEventListener('click', ()=> {
-    wrapper.style.height = "600px";
+    wrapper.style.height = "700px";
     pharmacyACR.classList.add('active');
     patientACR.classList.remove('active');
     doctorACR.classList.remove('active');

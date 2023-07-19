@@ -55,7 +55,7 @@
         </div>
 
         <div class="form">
-            <form action="register.php" class="register_patient" method="post" name="register_patient">
+            <form action="registerPatient.php" class="register_patient" method="post" name="register_patient">
                 <div class="input-box">
                     <label >SSN</label>
                     <input type="text" name="Patient_SSN" required>
@@ -104,7 +104,7 @@
                 <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
-            <form action="register.php" class="register_doctor" method="post" name="register_doctor">
+            <form action="registerDoctor.php" class="register_doctor" method="post" name="register_doctor">
                 <div class="input-box">
                     <label >SSN</label>
                     <input type="text" name="Doctor_SSN" required>
@@ -142,26 +142,30 @@
                 <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
-            <form action="register.php" class="register_pharmacy" method="post" name="register_pharmacy">
+            <form action="registerPharmacy.php" class="register_pharmacy" method="post" name="register_pharmacy">
                 <div class="input-box">
                     <label>Name</label>
-                    <input type="password" name="">
+                    <input type="text" name="Pharmacy_Name">
+                </div>
+                <div class="input-box">
+                    <label>Email</label>
+                    <input type="email" name="Pharmacy_Email">
                 </div>
                 <div class="input-box">
                     <label>Phone</label>
-                    <input type="tel" name="">
+                    <input type="tel" name="Pharmacy_Phone">
                 </div>
                 <div class="input-box">
                     <label >Address</label>
-                    <input type="text" name="">
+                    <input type="text" name="Pharmacy_Address">
                 </div>
                 <div class="input-box">
                     <label>Password</label>
-                    <input type="password" name="">
+                    <input type="password" name="Password">
                 </div>
                 <div class="input-box">
                     <label>Confirm </label>
-                    <input type="password" name="">
+                    <input type="password" name="Confirm_Password">
                 </div>
 
 
@@ -172,22 +176,26 @@
                 <a class="btn btn-outline-primary" href="register.html" role="button">Cancel</a>
             </form>
     
-            <form action="register.php" class="register_company" method="post" name="register_company">
+            <form action="registerCompany.php" class="register_company" method="post" name="register_company">
                 <div class="input-box">
                     <label>Name</label>
-                    <input type="password" name="">
+                    <input type="text" name="Company_Name">
                 </div>
                 <div class="input-box">
                     <label >Email</label>
-                    <input type="email" name="">
+                    <input type="email" name="Company_Email">
+                </div>
+                <div class="input-box">
+                    <label >Email</label>
+                    <input type="tel" name="Company_Phone">
                 </div>
                 <div class="input-box">
                     <label>Password</label>
-                    <input type="password" name="">
+                    <input type="password" name="Password">
                 </div>
                 <div class="input-box">
                     <label>Confirm </label>
-                    <input type="password" name="">
+                    <input type="password" name="Confirm_Password">
                 </div>
 
                 <div class="link">

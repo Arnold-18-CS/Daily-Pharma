@@ -924,15 +924,15 @@ label.left{
 }
 
 .form .register_doctor.active{
-    transform: translateY(-610px);
+    transform: translateY(-690px);
 }
 
 .form .register_pharmacy.active{
-    transform: translateY(-1130px);
+    transform: translateY(-1190px);
 }
 
 .form .register_company.active{
-    transform: translateY(-1530px);
+    transform: translateY(-1700px);
 }
 
 
