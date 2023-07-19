@@ -246,7 +246,15 @@ nav a:not(:last-child):hover::after{
 
 .actionCall{
     display: flex;
+    flex-direction: column;
     justify-content: center; 
+    text-align: center;
+}
+
+.actionCall p{
+    margin-bottom: 10px;
+    position: relative;
+    left: -10px;
 }
 
 .actionCall span{
@@ -255,6 +263,8 @@ nav a:not(:last-child):hover::after{
 
 .actionCall a{
     text-decoration: none;
+    position: relative;
+    left: -50px;
     color: white;
     background: black;
     padding: 10px;
