@@ -258,6 +258,12 @@ VALUES
 (25, 27, 9, '100 mg', '1 time daily', 'Take after meals', 'N'),
 (25, 42, 10, '10 mg', '1 time daily', 'Take with water', 'N');
 
+
+UPDATE prescriptions
+SET Prescribed  = 'Y'
+WHERE Prescription_ID > 10;
+
+
 -- --------------------------------------------------------
 
 --

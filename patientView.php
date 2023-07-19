@@ -16,10 +16,13 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 // Get the user information from the session variables
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
+$patientAddress = $_SESSION["user"]["Patient_Address"];
+$patientSSN = $_SESSION["user"]["Patient_SSN"];
+
 
 // Fetch drug information along with the prices from the drug_prices and pharmacies tables
 $query = $conn->query("
-    SELECT d.Drug_Name, d.Drug_Description, d.Drug_Manufacturing_Date, d.Drug_Expiration_Date, p.Pharmacy_Name, dp.Drug_Price
+    SELECT d.Drug_ID, d.Drug_Name, d.Drug_Description, d.Drug_Manufacturing_Date, d.Drug_Expiration_Date, p.Pharmacy_Name, dp.Drug_Price
     FROM drugs d
     INNER JOIN drug_prices dp ON d.Drug_ID = dp.Drug_ID
     INNER JOIN pharmacy p ON dp.Pharmacy_ID = p.Pharmacy_ID
@@ -151,7 +154,7 @@ while ($row = $query->fetch_assoc()) {
                 <p id="drugManufacturingDate"></p>
                 <p id="drugExpirationDate"></p>
                 <p>
-                    <a class="btn btn-primary" href="#" role="button">Place Order</a>
+                    <a id="placeOrderBtn" class="btn btn-primary" href="order.php">Place Order</a>
                 </p>
             </div>
         </div>
@@ -333,6 +336,15 @@ while ($row = $query->fetch_assoc()) {
                 //convert from php array to js array
                 const drug = <?php echo json_encode($drugInformation); ?>;
                 const selectedDrugInfo = drug.find((item) => item.Drug_Name === selectedDrug);
+                
+                fetch("store_selected_drug.php", {
+                    method: "POST",
+                    body: JSON.stringify({ selectedDrug }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                });
                 if (selectedDrugInfo) {
                     drugNameParagraph.textContent = "Drug Name: " + selectedDrugInfo.Drug_Name;
                     drugPriceParagraph.textContent = "Price: " + selectedDrugInfo.Drug_Price;
