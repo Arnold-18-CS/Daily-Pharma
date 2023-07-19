@@ -161,7 +161,26 @@ $user = $_SESSION["user"];
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
                             <div class="col-sm-6">
-                                <input type="text" id="drug_name" name="drug_name" class="form-control" required>
+                                <select name="Drug_ID" id="Drug_ID" style="width: 200px;" required>
+                                    <?php
+                                    require_once("../connect.php");
+
+                                    // Fetch drugs from the drugs table
+                                    $sql = "SELECT `Drug_ID`, `Drug_Name` FROM drugs";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<option value=" '. $row["Drug_ID"] .' "> '. $row["Drug_Name"] .' </option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">No drugs found</option>';
+                                    }
+
+                                    // Close the database connection
+                                    $conn->close();
+                                    ?>
+                                </select>
                             </div>
                         </div>
 
@@ -176,6 +195,13 @@ $user = $_SESSION["user"];
                             <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Dosage</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="prescription_dosage" name="prescription_dosage" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="prescription_inst">Prescription Instructions</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="prescription_inst" name="prescription_inst" >
                             </div>
                         </div>
         
