@@ -1,5 +1,5 @@
 <?php
-// doctorView.php
+// pharmacyView.php
 
 //establish a php session
 session_start();
@@ -42,7 +42,7 @@ $user = $_SESSION["user"];
                 <a href="index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="login.html" class="btn-login-popup" >Logout</a>                
+                <a href="logout.php" class="btn-login-popup" >Logout</a>                
             </nav>
 
             <?php
@@ -64,7 +64,7 @@ $user = $_SESSION["user"];
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="login.html">Logout</a>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
     </header>

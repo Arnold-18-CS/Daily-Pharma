@@ -1,5 +1,5 @@
 <?php
-// doctorView.php
+// adminView.php
 
 //establish a php session
 session_start();
@@ -26,9 +26,9 @@ $user = $_SESSION["user"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title> DailyPharma - Company Home</title>
+    <title> DailyPharma - Pharmacy Home</title>
 </head>
-<body class="CompanyView">
+<body class="PharmacyView">
 
     <!--Header-->
     <header>
@@ -41,22 +41,19 @@ $user = $_SESSION["user"];
                 <a href="index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="logout.php" class="btn-login-popup" >Logout</a>                
-                </nav>
-                </nav>
-    
+                <a href="login.html" class="btn-login-popup" >Logout</a>                
             </nav>
-    
+
             <?php
                 echo '<div class="profile">';
                 echo '<a href="profile.html">';
-                echo '<i class="uil uil-user"></i>'. $username .'';
+                echo '<i class="uil uil-user"></i>' . $username . '';
                 echo '</a>';
                 echo ' </div>';
             ?>
-
-
+        
         </div>
+
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
 
@@ -66,7 +63,7 @@ $user = $_SESSION["user"];
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="logout.php">Logout</a>
+                <a href="login.html">Logout</a>
             </div>
         </div>
     </header>
@@ -79,11 +76,19 @@ $user = $_SESSION["user"];
             <div class="image-slide">
                 <div class="image-desc active">
                     <h2>Manage your Drugs</h2>
-                    <p> Upload and manage the drugs you create.</p>
+                    <p> Upload and manage the drugs you sell to patients.</p>
                 </div>
                 <div class="image-desc">
-                    <h2>Manage your Contracts with Pharmacies</h2>
-                    <p>Make and stop contracts to supply various pharmacies.</p>
+                    <h2>Manage your Contracts with Pharmaceutical Companies</h2>
+                    <p>Make and stop contracts to supply various pharmaceutical companies.</p>
+                </div>
+                <div class="image-desc">
+                    <h2>Hand Out Doctor-Prescriptions</h2>
+                    <p>Give the drugs prescribed by doctors to patients.</p>
+                </div>
+                <div class="image-desc">
+                    <h2>Online Over-the-Counter Drugs</h2>
+                    <p>Supply patients with drugs they ordered online.</p>
                 </div>
             </div>
             <div class="arrow-buttons">
@@ -108,6 +113,10 @@ $user = $_SESSION["user"];
             <ul class="category-list">
                 <li class="category-item active" data-category="Manage-Drugs">MANAGE DRUGS</li>
                 <li class="category-item" data-category="Manage-Contracts">MANAGE CONTRACTS</li>
+                <li class="category-item" data-category="Manage-Prescriptions">PENDING PRESCRIPTIONS</li>
+                <li class="category-item" data-category="Prescription-History">PRESCRIPTION HISTORY </li>
+                <li class="category-item" data-category="Online-Orders">ONLINE ORDERS</li>
+
             </ul>
         </div>
 
@@ -123,13 +132,17 @@ $user = $_SESSION["user"];
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Drugs</th>       
+                                <th>Drug Name</th>       
+                                <th>Drug Price</th>       
                             </tr>
                         </thead>
                         <tbody>
                                 <tr>               
                                     <td>$row[Drug_Name]</td>
+                                    <td>$row[Drug_Price]</td>
+
                                     <td>
+                                        <a class='btn btn-primary btn-sm' href='pharmacyedit.php?name=$row[name]'>Edit</a>
                                         <a class='btn btn-danger btn-sm' href='#'>Delete</a>
                                     </td>
                                 </tr>
@@ -171,8 +184,148 @@ $user = $_SESSION["user"];
                     </table>
                 </div>
             </div>
-        </div>
 
+            <div class="category-content" id="Manage-Prescriptions">
+                <div class="container my-5">
+                    <h2>Pending Prescriptions</h2> 
+                        <form method="GET" action="search_prescription.php">
+                            <div class="search-container">
+                                <label for="patient_ssn">Search Prescription by Patient SSN:</label>
+                                <input type="text" id="patient_ssn" name="patient_ssn" required>
+                                <input type="submit" value="Search">
+                            </div>
+                        </form>
+
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Prescription ID</th>
+                                    <th>Patient SSN</th>
+                                    <th>Doctor SSN</th>
+                                    <th>Drug Name</th>
+                                    <th>Presciption Amount</th>
+                                    <th>Prescription Dosage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>$row["Prescription_ID"]</td>            
+                                        <td>$row["Patient_SSN"]</td>
+                                        <td>$row["Doctor_SSN"]</td>
+                                        <td>$row["Drug_Name"]</td>
+                                        <td>$row["Prescription_Amt"]</td>
+                                        <td>$row["Prescription_Dosage"]</td>
+                                        <td>
+                                            <a class='btn btn-danger btn-sm' href='#'>Dispense</a>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+
+  <!-- <table>
+        <tr>
+            <th>Prescription ID</th>
+            <th>Patient SSN</th>
+            <th>Doctor SSN</th>
+            <th>Drug Name</th>
+            <th>Prescription Amount</th>
+            <th>Prescription Dosage</th>
+        </tr>
+        
+         <?php 
+        // Establish a connection to the database
+        require_once("connect.php");
+
+        // Retrieve prescription data from the database
+        $sql = "SELECT * FROM prescriptions";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                $row["Prescription_ID"];
+                $row["Patient_SSN"];
+                $row["Doctor_SSN"];
+                $row["Drug_Name"];
+                $row["Prescription_Amt"];
+                $row["Prescription_Dosage"];
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+        }
+
+        // Close the database connection
+        $conn->close();
+         ?>
+    </table>-->
+                </div>
+            </div>
+
+            <div class="category-content" id="Prescription-History">
+                <div class="container my-5">
+                    <h2>Prescription History</h2> 
+                        <form method="GET" action="#">
+                            <div class="search-container">
+                                <label for="patient_ssn">Search Prescription by Patient SSN:</label>
+                                <input type="text" id="patient_ssn" name="patient_ssn" required>
+                                <input type="submit" value="Search">
+                            </div>
+                        </form>
+
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Prescription ID</th>
+                                    <th>Patient SSN</th>
+                                    <th>Doctor SSN</th>
+                                    <th>Drug Name</th>
+                                    <th>Prescription Amount</th>
+                                    <th>Prescription Dosage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>               
+                                        <td>$row["Prescription_ID"]</td>            
+                                        <td>$row["Patient_SSN"]</td>
+                                        <td>$row["Doctor_SSN"]</td>
+                                        <td>$row["Drug_Name"]</td>
+                                        <td>$row["Prescription_Amt"]</td>
+                                        <td>$row["Prescription_Dosage"]</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+
+            <div class="category-content" id="Online-Orders">
+                <div class="container my-5">
+                    <h2>List of Orders</h2> 
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Patient SSN</th>
+                                    <th>Patient Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>               
+                                        <td>$row["Order_ID"]</td>            
+                                        <td>$row["Patient_SSN"]</td>
+                                        <td>$row["Patient_Address"]</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="#" role="button">Send</a>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 
