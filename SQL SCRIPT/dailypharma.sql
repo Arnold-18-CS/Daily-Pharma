@@ -353,6 +353,13 @@ VALUES
 
 -- --------------------------------------------------------
 
+
+ALTER TABLE `pharmacy` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `Password`;
+ALTER TABLE `patients` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
+ALTER TABLE `company` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `Password`;
+ALTER TABLE `admin` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
+ALTER TABLE `doctors` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($error)) {
 
         //retrieve user details from the database
-        if ($query = $conn->prepare("SELECT * FROM `company` WHERE `Company_ID` = ?")) {
+        if ($query = $conn->prepare("SELECT * FROM `company` WHERE `Company_ID` = '?' AND `Status` = 'active'")) {
             $query->bind_param('i', $companyID);
             $query->execute();
             $row = $query->get_result()->fetch_assoc();
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $error .= 'The password is not valid.';
                 }
             } else {
-                $error .= 'No user exists with that Company ID';
+                $error .= 'No user exists with that Company ID or Account has been deactivated. Please try again or contact us via DailyPharma.gmail.com';
             }
         }
     }

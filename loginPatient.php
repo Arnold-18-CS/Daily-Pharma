@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($error)) {
 
         //retrieve user details from the database
-        if ($query = $conn->prepare("SELECT * FROM patients WHERE `Patient_SSN`=?")) {
+        if ($query = $conn->prepare("SELECT * FROM patients WHERE `Patient_SSN`=? AND `Status` = 'active'")) {
             $query->bind_param('s', $patientSSN);
             $query->execute();
             $row = $query->get_result()->fetch_assoc();
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $error .= 'The password is not valid.';
                 }
             } else {
-                $error .= 'No user exists with that Patient SSN';
+                $error .= 'No user exists with that Patient SSN or Account has been deactivated. Please try again or contact us via DailyPharma.gmail.com';
             }
         }
     }
