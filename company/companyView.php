@@ -49,7 +49,7 @@ $user = $_SESSION["user"];
     
             <?php
                 echo '<div class="profile">';
-                echo '<a href="../profile.html">';
+                echo '<a href="profile.php">';
                 echo '<i class="uil uil-user"></i>'. $username .'';
                 echo '</a>';
                 echo ' </div>';
@@ -65,7 +65,7 @@ $user = $_SESSION["user"];
                 <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="../profile.html">Profile</a><!--Place username here-->
+                <a href="profile.html">Profile</a><!--Place username here-->
                 <a href="../logout.php">Logout</a>
             </div>
         </div>

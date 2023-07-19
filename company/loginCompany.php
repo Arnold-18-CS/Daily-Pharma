@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($error)) {
 
         //retrieve user details from the database
-        if ($query = $conn->prepare("SELECT * FROM `company` WHERE `Company_ID` = '?' AND `Status` = 'active'")) {
+        if ($query = $conn->prepare("SELECT * FROM `company` WHERE `Company_ID` = ? AND `Status` = 'active'")) {
             $query->bind_param('i', $companyID);
             $query->execute();
             $row = $query->get_result()->fetch_assoc();

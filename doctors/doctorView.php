@@ -4,6 +4,8 @@
 //establish a php session
 session_start();
 
+require_once("../connect.php");
+
 // Check if the user is logged in
 if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
     // Redirect to the login page if the user is not logged in
@@ -113,7 +115,7 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
                 <div class="container my-5">
                     <h2>List of Patients</h2>            
                     <br>
-                    <a class="btn btn-primary" href="#" role="button">Add New Patient</a>
+                    <a class="btn btn-primary" href="patientList.php" role="button">Add New Patient</a>
                     <br>
                     <table class="table">
                         <thead>
@@ -131,7 +133,6 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
 
                             <?php
                             require_once("../connect.php");                     
-                            $ID = 47;
 
                             $result = $conn->query("
                             SELECT p.Patient_SSN, p.Patient_Name, p.Patient_Email, p.Patient_Phone, p.Patient_Gender, p.Patient_Age
@@ -184,8 +185,6 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
                             <div class="col-sm-6">
                                 <select name="Drug_ID" id="Drug_ID" style="width: 200px;" required>
                                     <?php
-                                    require_once("../connect.php");
-
                                     // Fetch drugs from the drugs table
                                     $sql = "SELECT `Drug_ID`, `Drug_Name` FROM drugs";
                                     $result = $conn->query($sql);
@@ -198,8 +197,7 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
                                         echo '<option value="">No drugs found</option>';
                                     }
 
-                                    // Close the database connection
-                                    $conn->close();
+                                    $result->close();
                                     ?>
                                 </select>
                             </div>
@@ -312,3 +310,7 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
     
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

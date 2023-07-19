@@ -1,3 +1,23 @@
+<?php
+// doctorView.php
+
+//establish a php session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
+    // Redirect to the login page if the user is not logged in
+    header("Location: ../login.html");
+    exit;
+}
+
+// Get the user information from the session variables
+$username = $_SESSION["userid"];
+$user = $_SESSION["user"];
+$ID = $_SESSION["user"]["Doctor_SSN"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +28,43 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="DoctorView">
+
+    <header>
+        <div class="logo">
+            <a href="../index.html">DailyPharma</a>
+        </div>
+
+        <div class="navbar">
+            <nav class= navbar id="navbar">
+                <a href="../index.html">Home</a>
+                <a href="#about">Features</a>
+                <a href="#footer">Contact Us</a>
+                <a href="../logout.php" class="btn-login-popup">Logout</a>    
+            </nav>
+    
+            <?php
+                echo '<div class="profile">';
+                echo '<a href="../profile.html">';
+                echo '<i class="uil uil-user"></i>' . $username . '';
+                echo '</a>';
+                echo '</div>';
+            ?>
+        </div>
+
+        <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+        <div id="menu" onclick="toggleOverlay()">
+            <div id="menu-content">
+                <a href="../index.html">Home</a>
+                <a href="#about">Features</a>
+                <a href="#footer">Contact Us</a>
+                <a href="../profile.html">Profile</a><!--Place username here-->
+                <a href="../logout.php">Logout</a>
+            </div>
+        </div>
+    </header>
+
     <div class="container my-5">
         <h2>List of Patients</h2>
         <br>
@@ -28,22 +84,21 @@
 
                 require_once("../connect.php");
 
-
                 $resultsPerPage = 5;
                 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                 $offset = ($currentPage - 1) * $resultsPerPage;
 
-                $countQuery = "SELECT COUNT(*) AS total FROM clients";
-                $countResult = $connection->query($countQuery);
+                $countQuery = "SELECT COUNT(*) AS total FROM patients";
+                $countResult = $conn->query($countQuery);
                 $countRow = $countResult->fetch_assoc();
                 $totalResults = $countRow['total'];
                 $totalPages = ceil($totalResults / $resultsPerPage);
 
                 $sql = "SELECT * FROM patients LIMIT $offset, $resultsPerPage";
-                $result = $connection->query($sql);
+                $result = $conn->query($sql);
 
                 if (!$result) {
-                    die("Invalid query: " . $connection->error);
+                    die("Invalid query: " . $conn->error);
                 }
 
                 while ($row = $result->fetch_assoc()) {
@@ -56,8 +111,7 @@
                         <td>$row[Patient_Gender]</td>
                         <td>$row[Patient_Age]</td>
                         <td>
-                            <a class='btn btn-primary btn-sm' href='doctorNewPatient.php?id=$row[Patient_SSN]'>Edit</a>
-                            <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
+                            <a class='btn btn-primary btn-sm' href='doctorNewPatient.php?id=$row[Patient_SSN]'>Add</a>
                         </td>
                     </tr>
                     ";
@@ -71,7 +125,7 @@
             <?php
 for ($i = 1; $i <= $totalPages; $i++) {
     $activeClass = ($i == $currentPage) ? 'active' : '';
-    echo "<li class='page-item $activeClass'><a class='page-link' href='patientindex.php?page=$i'>$i</a></li>";
+    echo "<li class='page-item $activeClass'><a class='page-link' href='patientList.php?page=$i'>$i</a></li>";
 }
 ?>
 
