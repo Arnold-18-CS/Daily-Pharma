@@ -43,10 +43,6 @@ $user = $_SESSION["user"];
                 <a href="#inquiries">Medical Inquiries</a>
                 <a href="#footer">Contact Us</a>
                 <a href="logout.php" class="btn-login-popup">Logout</a>
-
-                </nav>
-                </nav>
-    
             </nav>
 
 
