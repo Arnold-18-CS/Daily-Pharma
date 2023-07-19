@@ -935,11 +935,10 @@ label.left{
     margin-top: 10px;
     margin-right: 30px;
 }
-
 .profile{
     text-align: center;
-    margin-top: 10px ;
-    width: 150px;
+    margin: 0  30px ;
+    width: 300px;
 }
 
 .profile a i{
@@ -948,8 +947,6 @@ label.left{
 
 .profile a{
     padding: 7px;
-    border: 1px solid black;
-    border-radius: 5px;
     text-decoration: none;
     color: black;
     font-weight: 500;
@@ -960,6 +957,7 @@ label.left{
 .profile a:hover{
     background-color: #ccc;
 }
+
 @media screen and (max-width:1100px){
     .navbar{
         display: none;
@@ -1247,7 +1245,9 @@ border: 2px solid black;
     left: -70px;
 }
 
-
+.PharmacyView .profile{
+    border: none;
+}
 .PharmacyView .sidebar{
     position: relative;
     left: -30px;

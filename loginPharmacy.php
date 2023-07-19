@@ -12,15 +12,15 @@ $error = '';
 
 //first if to prevent injection of data into the search bar, security
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $doctorSSN = trim($_POST['Doctor_SSN']);
+    $pharmacyID = trim($_POST['Pharmacy_ID']);
     $password = trim($_POST['Password']);
 
     //if no error has occured, retrieve user form the databse
     if (empty($error)) {
 
         //retrieve user details from the database
-        if ($query = $conn->prepare("SELECT * FROM doctors WHERE `Doctor_SSN`= ? ")) {
-            $query->bind_param('i', $doctorSSN);
+        if ($query = $conn->prepare("SELECT * FROM `pharmacy` WHERE `Pharmacy_ID` = ? ")) {
+            $query->bind_param('i', $pharmacyID);
             $query->execute();
             $row = $query->get_result()->fetch_assoc();
 
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 //tests if the entered password matches that in the database
                 if (hash_equals($password, $row['Password'])) {
-                    $_SESSION["userid"] = $row['Doctor_Name'];
+                    $_SESSION["userid"] = $row['Pharmacy_Name'];
                     $_SESSION["user"] = $row;
             
                     //close them to prevent further action upon them
@@ -36,13 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $conn->close();
             
                     // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: doctorView.php");
+                    header("Location: pharmacyView.php");
                     exit;
                 } else {
                     $error .= 'The password is not valid.';
                 }
             } else {
-                $error .= 'No user exists with that Doctor SSN';
+                $error .= 'No user exists with that Pharmacy ID';
             }
         }
     }
