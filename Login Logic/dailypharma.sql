@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   `Doctor_SSN` INT(10) NOT NULL,
   `Drug_ID` INT(10) NOT NULL,
   `Prescription_Amount` VARCHAR(50) NOT NULL,
-  `Prescription_Dosage` VARCHAR(10) NOT NULL,
+  `Prescription_Dosage` VARCHAR(50) NOT NULL,
   `Prescription_Instructions` VARCHAR(200) DEFAULT NULL,
   `Prescribed` CHAR(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`Prescription_ID`),

@@ -1,3 +1,22 @@
+<?php
+// patientView.php
+
+//establish a php session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
+    // Redirect to the login page if the user is not logged in
+    header("Location: login.html");
+    exit;
+}
+
+// Get the user information from the session variables
+$patientSSN = $_SESSION["userid"];
+$user = $_SESSION["user"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,14 +47,15 @@
                 </nav>
     
             </nav>
-    
-            echo '<div class="profile">';
+
+
+            <?php
+                echo '<div class="profile">';
                 echo '<a href="profile.html">';
                 echo '<i class="uil uil-user"></i>Profile (' . $patientSSN . ')';
                 echo '</a>';
                 echo '</div>';
-
-
+            ?>
         </div>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>

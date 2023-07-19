@@ -4,7 +4,7 @@
 session_start();
 
 //establish a connection
-require_once "connect.php";
+require_once("connect.php");
 
 //creating a variable to hold errors that may occur uppon login
 $error = '';
@@ -24,23 +24,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $query->execute();
             $row = $query->get_result()->fetch_assoc();
 
-            //if Patient_SSN was found, test for password 
             if ($row) {
 
-                //tests if the entered password  mar=tches that in the database
+                //tests if the entered password matches that in the database
                 if (hash_equals($password, $row['Password'])) {
                     $_SESSION["userid"] = $row['Patient_SSN'];
                     $_SESSION["user"] = $row;
-                    $username = $row['Patient_SSN'];
-
+            
                     //close them to prevent further action upon them
                     $query->close();
                     $conn->close();
-
+            
                     // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: welcomePatient.php");
+                    header("Location: patientView.php");
                     exit;
-
                 } else {
                     $error .= 'The password is not valid.';
                 }
@@ -48,18 +45,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $error .= 'No user exists with that Patient SSN';
             }
         }
-        $query->close();
     }
 }
 
+// Check if there is an error, and if so, display an alert
+if (!empty($error)) {
+    echo "<script>alert('$error');</script>";
+}
 
+/*
 if (!empty($error)) {
     // Adding encryption to the error message so that it does not show up on the search bar when appended
     $key = 'my_key';
     $encryptedError = encryptError($error, $key);
 
     // Redirect to the index page with encrypted error message
-    header("Location: index.html?error=" . urlencode($encryptedError));
+    header("Location: login.html?error=" . urlencode($encryptedError));
     exit;
 }
 
@@ -74,7 +75,6 @@ function encryptError($error, $key) {
     }
 
     return base64_encode($encryptedError);
-}
+}*/
 
 ?>
-
