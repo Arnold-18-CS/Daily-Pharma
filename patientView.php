@@ -4,6 +4,8 @@
 //establish a php session
 session_start();
 
+require_once("connect.php");
+
 // Check if the user is logged in
 if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
     // Redirect to the login page if the user is not logged in
@@ -15,6 +17,17 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
 
+// Fetch drug information along with the prices from the drug_prices and pharmacies tables
+$query = $conn->query("
+    SELECT d.Drug_Name, d.Drug_Description, d.Drug_Manufacturing_Date, d.Drug_Expiration_Date, p.Pharmacy_Name, dp.Drug_Price
+    FROM drugs d
+    INNER JOIN drug_prices dp ON d.Drug_ID = dp.Drug_ID
+    INNER JOIN pharmacy p ON dp.Pharmacy_ID = p.Pharmacy_ID
+");
+$drugInformation = array();
+while ($row = $query->fetch_assoc()) {
+    $drugInformation[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -119,31 +132,29 @@ $user = $_SESSION["user"];
                     <input type="text" placeholder="Search medications...">
                     <button type="submit">Search</button>
                 </div> -->
-            
-                <div class="select-container">
-                    <label for="availableDrugs">Available Drugs</label>
-                    <select name="availableDrugs" id="availableDrugs">
-                      <optgroup label="Cosmetics">
-                        <option value="Cosmetic 1">Cosmetic 1</option>
-                        <option value="Cosmetic 2">Cosmetic 2</option>
-                      </optgroup>
-                      <optgroup label="Antibiotics">
-                        <option value="Antibiotic 1">Antibiotic 1</option>
-                        <option value="Antibiotic 2">Antibiotic 2</option>
-                      </optgroup>
-                      <!-- Add more optgroups and options for other drug categories -->
-                    </select>
-                  </div>
-                  
-                  <div id="drugInfo" style="display: none;">
-                    <h2>Drug Information</h2>
-                    <p id="drugName"></p>
-                    <p id="drugPrice"></p>
-                    <p>
-                        <a class="btn btn-primary" href="#" role="button">Place Order</a>
-                    </p>
-                  </div>                  
+
+            <div class="select-container">
+                <label for="availableDrugs">Available Drugs</label>
+                <select name="availableDrugs" id="availableDrugs">
+                    <option value="">Select a drug</option>
+                    <?php foreach ($drugInformation as $drug) : ?>
+                        <option value="<?php echo htmlspecialchars($drug['Drug_Name']); ?>"><?php echo htmlspecialchars($drug['Drug_Name'] . ' - ' . $drug['Pharmacy_Name'] . ' - Price: ' . $drug['Drug_Price']); ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
+
+            <div id="drugInfo" style="display: none;">
+                <h2>Drug Information</h2>
+                <p id="drugName"></p>
+                <p id="drugPrice"></p>
+                <p id="drugDescription"></p>
+                <p id="drugManufacturingDate"></p>
+                <p id="drugExpirationDate"></p>
+                <p>
+                    <a class="btn btn-primary" href="#" role="button">Place Order</a>
+                </p>
+            </div>
+        </div>
 
             <div class="category-content" id="View-Presciptions">
                 <div class="container my-5">
@@ -307,7 +318,36 @@ $user = $_SESSION["user"];
     <script src="script.js"></script>
     <script src="script1.js"></script>
     <script src="script4.js"></script>
-    <script src="script5.js"></script>
+    <script>
+        const selectElement = document.getElementById("availableDrugs");
+        const drugInfoDiv = document.getElementById("drugInfo");
+        const drugNameParagraph = document.getElementById("drugName");
+        const drugPriceParagraph = document.getElementById("drugPrice");
+        const drugDescriptionParagraph = document.getElementById("drugDescription");
+        const drugManufacturingDateParagraph = document.getElementById("drugManufacturingDate");
+        const drugExpirationDateParagraph = document.getElementById("drugExpirationDate");
+
+        selectElement.addEventListener("change", (event) => {
+            const selectedDrug = event.target.value;
+            if (selectedDrug) {
+                //convert from php array to js array
+                const drug = <?php echo json_encode($drugInformation); ?>;
+                const selectedDrugInfo = drug.find((item) => item.Drug_Name === selectedDrug);
+                if (selectedDrugInfo) {
+                    drugNameParagraph.textContent = "Drug Name: " + selectedDrugInfo.Drug_Name;
+                    drugPriceParagraph.textContent = "Price: " + selectedDrugInfo.Drug_Price;
+                    drugDescriptionParagraph.textContent = "Description: " + selectedDrugInfo.Drug_Description;
+                    drugManufacturingDateParagraph.textContent = "Manufacturing Date: " + selectedDrugInfo.Drug_Manufacturing_Date;
+                    drugExpirationDateParagraph.textContent = "Expiration Date: " + selectedDrugInfo.Drug_Expiration_Date;
+                    drugInfoDiv.style.display = "block";
+                } else {
+                    drugInfoDiv.style.display = "none";
+                }
+            } else {
+                drugInfoDiv.style.display = "none";
+            }
+        });
+    </script>
     
 </body>
 </html>

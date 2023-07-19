@@ -360,7 +360,45 @@ ALTER TABLE `company` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER 
 ALTER TABLE `admin` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
 ALTER TABLE `doctors` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
 
-COMMIT;
+-- Create the drug_prices table with drug_id, pharmacy_id, and drug_price columns
+CREATE TABLE drug_prices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Drug_ID INT NOT NULL,
+    Pharmacy_ID INT NOT NULL,
+    Drug_Price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (Drug_ID) REFERENCES drugs(Drug_ID),
+    FOREIGN KEY (Pharmacy_ID) REFERENCES pharmacy(Pharmacy_ID)
+);
+
+-- Insert drug prices data into drug_prices table
+-- Drug: Citalopram, Pharmacy: XYZ Pharmacy
+INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
+VALUES
+  ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Citalopram'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'XYZ Pharmacy'), 30.00);
+
+-- Drug: Simvastatin, Pharmacy: XYZ Pharmacy
+INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
+VALUES
+  ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Simvastatin'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'XYZ Pharmacy'), 20.20);
+  -- Drug: Metformin, Pharmacy: XYZ Pharmacy
+  INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
+  VALUES
+    ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Metformin'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'XYZ Pharmacy'), 15.50);
+    -- Drug: Cetirizine, Pharmacy: XYZ Pharmaceuticals
+    INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
+    VALUES
+      ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Cetirizine'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'XYZ Pharmacy'), 9.50);
+
+-- Drug: Loratadine, Pharmacy: ABC Pharmacy
+INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
+VALUES
+  ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Loratadine'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'ABC Pharmacy'), 7.50);
+  
+  -- Drug: Aspirin, Pharmacy: ABC Pharmaceuticals
+  INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
+  VALUES
+    ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Aspirin'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'ABC Pharmacy'), 6.99);
+  COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
