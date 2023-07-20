@@ -73,7 +73,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Staus</th>                   
+                    <th>Status</th>                   
                 </tr>
 </thead>
 <tbody>
