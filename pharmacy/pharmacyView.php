@@ -294,27 +294,48 @@ $user = $_SESSION["user"];
 
             <div class="category-content" id="Online-Orders">
                 <div class="container my-5">
-                    <h2>List of Orders</h2> 
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Patient SSN</th>
-                                    <th>Patient Address</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>               
-                                        <td>$row["Order_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Patient_Address"]</td>
-                                        <td>
-                                            <a class="btn btn-primary" href="#" role="button">Send</a>
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table>
+                <h2>List of Orders</h2>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Drug ID</th>
+                                <th>Patient SSN</th>
+                                <th>Patient Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            require_once("connect.php");
+
+                            // Prepare and execute the database query
+                            $result = $conn->query("
+                                SELECT o.Order_ID, o.Drug_ID, o.Patient_SSN, p.Patient_Address
+                                    FROM orders o
+                                    INNER JOIN patients p ON o.Patient_SSN = p.Patient_SSN"
+                            );
+
+                            // Display the orders data in the table
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["Order_ID"] . "</td>";
+                                    echo "<td>" . $row["Drug_ID"] . "</td>";
+                                    echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                    echo "<td>" . $row["Patient_Address"] . "</td>";
+                                    echo "<td>";
+                                    echo "<a class='btn btn-primary' href='sendOrder.php?id=$row[Order_ID]' role='button'>Send</a>";
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            $conn->close();
+                            ?>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
