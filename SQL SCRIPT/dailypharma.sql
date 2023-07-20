@@ -112,15 +112,16 @@ VALUES
 --
 -- Table structure for table `doctor_patient`
 --
-CREATE TABLE doctor_patient (
-    Doctor_SSN INT NOT NULL,
-    Patient_SSN INT NOT NULL,
-    PRIMARY KEY (Doctor_SSN, Patient_SSN),
-    FOREIGN KEY (Doctor_SSN) REFERENCES doctors (Doctor_SSN),
-    FOREIGN KEY (Patient_SSN) REFERENCES patients (Patient_SSN)
+CREATE TABLE `doctor_patient` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `Doctor_SSN` INT(10) NOT NULL,
+  `Patient_SSN` INT(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`Doctor_SSN`) REFERENCES doctors (`Doctor_SSN`),
+  FOREIGN KEY (`Patient_SSN`) REFERENCES patients (`Patient_SSN`)
 );
 
-INSERT INTO doctor_patient (Doctor_SSN, Patient_SSN)
+INSERT INTO `doctor_patient` ( `Doctor_SSN`, `Patient_SSN`)
 VALUES
     (47, 27),
     (47, 28),
@@ -131,9 +132,6 @@ VALUES
     (47, 33),
     (42, 34),
     (42, 35);
-
-
-
 
 -- --------------------------------------------------------
 
@@ -392,6 +390,8 @@ ALTER TABLE `patients` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER 
 ALTER TABLE `company` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `Password`;
 ALTER TABLE `admin` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
 ALTER TABLE `doctors` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
+ALTER TABLE `contracts` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `End_Status`;
+
 
 -- Create the drug_prices table with drug_id, pharmacy_id, and drug_price columns
 CREATE TABLE drug_prices (

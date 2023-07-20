@@ -26,7 +26,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
-<body class="DoctorView">
+<body class="PharmacyView">
 
     <header>
         <div class="logo">
@@ -64,17 +64,16 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
     </header>
 
     <div class="container my-5">
-        <h2>List of Patients</h2>
+        <h2>List of Companies</h2>
         <br>
         <table class="table">
             <thead>
                 <tr>
-                    <th>SSN</th>       
+                    <th>ID</th>       
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Gender</th>                   
-                    <th>Age</th>
+                    <th>Staus</th>                   
                 </tr>
             </thead>
             <tbody>
@@ -92,7 +91,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                 $totalResults = $countRow['total'];
                 $totalPages = ceil($totalResults / $resultsPerPage);
 
-                $sql = "SELECT * FROM patients LIMIT $offset, $resultsPerPage";
+                $sql = "SELECT * FROM company LIMIT $offset, $resultsPerPage";
                 $result = $conn->query($sql);
 
                 if (!$result) {
@@ -102,14 +101,13 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                 while ($row = $result->fetch_assoc()) {
                     echo "
                     <tr>
-                        <td>$row[Patient_SSN]</td>                
-                        <td>$row[Patient_Name]</td>
-                        <td>$row[Patient_Email]</td>
-                        <td>$row[Patient_Phone]</td>
-                        <td>$row[Patient_Gender]</td>
-                        <td>$row[Patient_Age]</td>
+                        <td>$row[Company_ID]</td>                
+                        <td>$row[Company_Name]</td>
+                        <td>$row[Company_Email]</td>
+                        <td>$row[Company_Phone]</td>
+                        <td>$row[Status]</td>
                         <td>
-                            <a class='btn btn-primary btn-sm' href='doctorNewPatient.php?id=$row[Patient_SSN]'>Add</a>
+                            <a class='btn btn-primary btn-sm' href='newContract.php?id=$row[Company_ID]'>Add</a>
                         </td>
                     </tr>
                     ";
@@ -123,7 +121,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
             <?php
 for ($i = 1; $i <= $totalPages; $i++) {
     $activeClass = ($i == $currentPage) ? 'active' : '';
-    echo "<li class='page-item $activeClass'><a class='page-link' href='patientList.php?page=$i'>$i</a></li>";
+    echo "<li class='page-item $activeClass'><a class='page-link' href='companyList.php?page=$i'>$i</a></li>";
 }
 ?>
 

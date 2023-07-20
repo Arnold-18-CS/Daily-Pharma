@@ -3,13 +3,13 @@ session_start();
 
 
 if (isset($_GET["id"])) {
-    $doctorID = $_SESSION["user"]["Doctor_SSN"];
-    $patientID = $_GET["id"];
+    $pharmacyID = $_SESSION["user"]["Pharmacy_ID"];
+    $companyID = $_GET["id"];
 
     require_once("connect.php");
 
     $result = $conn->query("
-    SELECT * FROM doctor_patient WHERE Doctor_SSN = '$doctorID' AND Patient_SSN = '$patientID'
+    SELECT * FROM contracts WHERE Pharmacy_ID = '$pharmacyID' AND CompanY_ID = '$companyID'
     ");
 
     if ($result->num_rows === 0) {
