@@ -1,38 +1,37 @@
 <?php
 session_start();
+require_once("connect.php");
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once("../connect.php");
 
-if (isset($_GET["id"])) {
+    // Get the selected companyID, pharmacyID, and supervisorID from the POST data
+    $companyID = $_POST["companyID"];
     $pharmacyID = $_SESSION["user"]["Pharmacy_ID"];
-    $companyID = $_GET["id"];
+    $supervisorID = $_POST["supervisorID"];
 
-    require_once("connect.php");
 
-    $result = $conn->query("
-    SELECT * FROM contracts WHERE Pharmacy_ID = '$pharmacyID' AND CompanY_ID = '$companyID'
-    ");
-
-    if ($result->num_rows === 0) {
-        $insertQuery = "INSERT INTO doctor_patient (Doctor_SSN, Patient_SSN) VALUES ('$doctorID', '$patientID')";
-
-        if ($conn->query($insertQuery) === TRUE) {
-            echo "<script>alert('Successful addition of new patient')
-            window.location.href = 'doctorView.php';
-            </script>";
-
-        } else {
-            echo "<script>alert('Error in addition of new patient. Try Again')
-            window.location.href = 'doctorView.php';
-            </script>";
-        }
-    } else {
-        echo "<script>alert('Patient is already enrolled with you. Try Again')
-        window.location.href = 'doctorView.php';
+    // Check if a supervisor was selected
+    if (empty($supervisorID)) {
+        echo "<script>alert('No Supervisor selected')
+        window.location.href = 'pharmacyView.php';
         </script>";
     }
-} else {
-    echo "<script>alert('No Patient selected')</script>";
-    header("Location: doctorView.php");
-    exit;
+
+    $startDate = date("Y-m-d");
+    $endDate = date("Y-m-d", strtotime("+6 months"));
+
+    // Perform the insert query to create a new contract
+    $insertQuery = "INSERT INTO contracts (Company_ID, Pharmacy_ID, Supervisor_ID, Start_Date, End_Date) 
+                    VALUES ('$companyID', '$pharmacyID', '$supervisorID', '$startDate', '$endDate')";
+
+    if ($conn->query($insertQuery) === TRUE) {
+        echo "<script>alert('Contract Formation In Progress.')
+        window.location.href = 'pharmacyView.php';
+        </script>";
+    } else {
+        // If there was an error in the insert query, you can handle it as per your requirement
+        die("Error: " . $conn->error);
+    }
 }
 ?>

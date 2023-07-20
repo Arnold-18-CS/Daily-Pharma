@@ -75,45 +75,67 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                     <th>Phone</th>
                     <th>Staus</th>                   
                 </tr>
-            </thead>
-            <tbody>
-                <?php
+</thead>
+<tbody>
+    <?php
 
-                require_once("../connect.php");
+    require_once("../connect.php");
 
-                $resultsPerPage = 5;
-                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                $offset = ($currentPage - 1) * $resultsPerPage;
+    $supervisorsResult = $conn->query("SELECT * FROM supervisors");
+    $supervisors = array();
+    while ($supervisorRow = $supervisorsResult->fetch_assoc()) {
+        $supervisors[] = $supervisorRow;
+    }
 
-                $countQuery = "SELECT COUNT(*) AS total FROM company";
-                $countResult = $conn->query($countQuery);
-                $countRow = $countResult->fetch_assoc();
-                $totalResults = $countRow['total'];
-                $totalPages = ceil($totalResults / $resultsPerPage);
+    $resultsPerPage = 5;
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    $offset = ($currentPage - 1) * $resultsPerPage;
 
-                $sql = "SELECT * FROM company LIMIT $offset, $resultsPerPage";
-                $result = $conn->query($sql);
+    $countQuery = "SELECT COUNT(*) AS total FROM company";
+    $countResult = $conn->query($countQuery);
+    $countRow = $countResult->fetch_assoc();
+    $totalResults = $countRow['total'];
+    $totalPages = ceil($totalResults / $resultsPerPage);
 
-                if (!$result) {
-                    die("Invalid query: " . $conn->error);
-                }
+    $sql = "SELECT * FROM company LIMIT $offset, $resultsPerPage";
+    $result = $conn->query($sql);
 
-                while ($row = $result->fetch_assoc()) {
-                    echo "
-                    <tr>
-                        <td>$row[Company_ID]</td>                
-                        <td>$row[Company_Name]</td>
-                        <td>$row[Company_Email]</td>
-                        <td>$row[Company_Phone]</td>
-                        <td>$row[Status]</td>
-                        <td>
-                            <a class='btn btn-primary btn-sm' href='newContract.php?id=$row[Company_ID]'>Add</a>
-                        </td>
-                    </tr>
-                    ";
-                }
-                ?>
-            </tbody>
+    if (!$result) {
+        die("Invalid query: " . $conn->error);
+    }
+
+    while ($row = $result->fetch_assoc()) {
+        echo "
+        <tr>
+            <td>$row[Company_ID]</td>                
+            <td>$row[Company_Name]</td>
+            <td>$row[Company_Email]</td>
+            <td>$row[Company_Phone]</td>
+            <td>$row[Status]</td>
+            <td>
+                <form action='newContract.php' method='post'>
+                    <input type='hidden' name='companyID' value='$row[Company_ID]'>
+                    <input type='hidden' name='companyName' value='$row[Company_Name]'>
+                    <input type='hidden' name='companyEmail' value='$row[Company_Email]'>
+                    <input type='hidden' name='companyPhone' value='$row[Company_Phone]'>
+                    <input type='hidden' name='status' value='$row[Status]'>
+                    <div class='form-group'>
+                        <select class='form-control' name='supervisorID' required>
+                            <option value='' disabled selected>Select a Supervisor</option>";
+                            foreach ($supervisors as $supervisor) {
+                                echo "<option value='$supervisor[Supervisor_ID]'>$supervisor[Supervisor_Name]</option>";
+                            }
+        echo "
+                        </select>
+                    </div>
+                    <button type='submit' class='btn btn-success btn-sm'>Form Contract</button>
+                </form>
+            </td>
+        </tr>
+        ";
+    }
+    ?>
+</tbody>
         </table>
 
         <nav aria-label="Page navigation">

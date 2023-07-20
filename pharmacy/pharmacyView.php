@@ -157,7 +157,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                 <div class="container my-5">
                 <h2>List of Contracts</h2>
                     <br>
-                    <a class="btn btn-primary" href="" role="button">Add New Contract</a>
+                    <a class="btn btn-primary" href="companyList.php" role="button">Add New Contract</a>
                     <br>
                     <table class="table">
                         <thead>
