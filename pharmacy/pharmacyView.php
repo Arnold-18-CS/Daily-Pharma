@@ -204,63 +204,41 @@ $user = $_SESSION["user"];
                                     <th>Prescription ID</th>
                                     <th>Patient SSN</th>
                                     <th>Doctor SSN</th>
-                                    <th>Drug Name</th>
+                                    <th>Drug ID</th>
                                     <th>Presciption Amount</th>
                                     <th>Prescription Dosage</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                        <td>
-                                            <a class='btn btn-danger btn-sm' href='#'>Dispense</a>
-                                        </td>
-                                    </tr>
+                                <?php 
+                                // Establish a connection to the database
+                                require_once("../connect.php");
+
+                                // Retrieve prescription data from the database
+                                $sql = "SELECT * FROM prescriptions WHERE Prescribed = 'N';";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "</tr>";
+                                        echo "<tr>";                                         
+                                        echo "<td>" . $row["Prescription_ID"]. "</td>";
+                                        echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                        echo "<td>" . $row["Doctor_SSN"]. "</td>";
+                                        echo "<td>" . $row["Drug_ID"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Amount"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Dosage"] . "</td>";
+                                        echo "<td>";
+                                        echo    "<a class='btn btn-danger btn-sm' href='#'>Dispense</a>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
-
-  <!-- <table>
-        <tr>
-            <th>Prescription ID</th>
-            <th>Patient SSN</th>
-            <th>Doctor SSN</th>
-            <th>Drug Name</th>
-            <th>Prescription Amount</th>
-            <th>Prescription Dosage</th>
-        </tr>
-        
-         <?php 
-        // Establish a connection to the database
-        require_once("../connect.php");
-
-        // Retrieve prescription data from the database
-        $sql = "SELECT * FROM prescriptions";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                $row["Prescription_ID"];
-                $row["Patient_SSN"];
-                $row["Doctor_SSN"];
-                $row["Drug_Name"];
-                $row["Prescription_Amt"];
-                $row["Prescription_Dosage"];
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
-        }
-
-        // Close the database connection
-        $conn->close();
-         ?>
-    </table>-->
                 </div>
             </div>
 
@@ -288,14 +266,27 @@ $user = $_SESSION["user"];
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>               
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                    </tr>
+                            <?php 
+                            // Retrieve prescription data from the database
+                            $sql = "SELECT * FROM prescriptions WHERE Prescribed = 'Y';";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "</tr>";
+                                    echo "<tr>";                                         
+                                    echo "<td>" . $row["Prescription_ID"]. "</td>";
+                                    echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                    echo "<td>" . $row["Doctor_SSN"]. "</td>";
+                                    echo "<td>" . $row["Drug_ID"] . "</td>";
+                                    echo "<td>" . $row["Prescription_Amount"] . "</td>";
+                                    echo "<td>" . $row["Prescription_Dosage"] . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                            }
+                            ?>
                             </tbody>
                         </table>
                 </div>
