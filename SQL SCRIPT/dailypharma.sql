@@ -96,7 +96,6 @@ CREATE TABLE IF NOT EXISTS `doctors` (
 
 INSERT INTO `doctors` (`Doctor_SSN`, `Doctor_Name`, `Doctor_Phone`, `Doctor_Speciality`, `Doctor_Experience`, `Password`)
 VALUES
-(24, 'Dr. Michael', 2147483647, 'Pediatrics', 10, 'password1'),
 (25, 'Dr. Sarah', 1112223333, 'Orthopedic', 11, 'password2'),
 (26, 'Dr. Christopher', 1112223333, 'Orthopedic', 5, 'password3'),
 (27, 'Dr. Olivia', 147483647, 'Neurosurgeon', 3, 'password4'),
@@ -265,22 +264,22 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
 
 INSERT INTO `prescriptions` (`Patient_SSN`, `Doctor_SSN`, `Drug_ID`, `Prescription_Amount`, `Prescription_Dosage`, `Prescription_Instructions`, `Prescribed`)
 VALUES
-(23, 24, 1, '100 mg', '2 times daily', 'Take with water', 'N'),
+(23, 25, 1, '100 mg', '2 times daily', 'Take with water', 'N'),
 (23, 25, 2, '500 mg', '1 time daily', 'Take with food', 'N'),
 (23, 26, 3, '75 mg', '1 time daily', 'Take after meals', 'N'),
 (23, 27, 4, '20 mg', '1 time daily', 'Take in the evening', 'N'),
 (23, 42, 5, '50 mg', '2 times daily', 'Take with or without food', 'N'),
-(23, 24, 6, '5 mg', '1 time daily', 'Take at the same time each day', 'N'),
+(23, 25, 6, '5 mg', '1 time daily', 'Take at the same time each day', 'N'),
 (23, 25, 7, '10 mg', '1 time daily', 'Take with or without food', 'N'),
 (23, 26, 8, '20 mg', '1 time daily', 'Take with or without food', 'N'),
 (23, 27, 9, '100 mg', '1 time daily', 'Take after meals', 'N'),
 (23, 42, 10, '10 mg', '1 time daily', 'Take with water', 'N'),
-(24, 24, 1, '100 mg', '2 times daily', 'Take with water', 'N'),
+(24, 25, 1, '100 mg', '2 times daily', 'Take with water', 'N'),
 (24, 25, 2, '500 mg', '1 time daily', 'Take with food', 'N'),
 (24, 26, 3, '75 mg', '1 time daily', 'Take after meals', 'N'),
 (24, 27, 4, '20 mg', '1 time daily', 'Take in the evening', 'N'),
 (24, 42, 5, '50 mg', '2 times daily', 'Take with or without food', 'N'),
-(25, 24, 6, '5 mg', '1 time daily', 'Take at the same time each day', 'N'),
+(25, 25, 6, '5 mg', '1 time daily', 'Take at the same time each day', 'N'),
 (25, 25, 7, '10 mg', '1 time daily', 'Take with or without food', 'N'),
 (25, 26, 8, '20 mg', '1 time daily', 'Take with or without food', 'N'),
 (25, 27, 9, '100 mg', '1 time daily', 'Take after meals', 'N'),
