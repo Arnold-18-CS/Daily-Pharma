@@ -121,7 +121,7 @@ CREATE TABLE doctor_patient (
     FOREIGN KEY (Patient_SSN) REFERENCES patients (Patient_SSN)
 );
 
-INSERT INTO doctor_patient (Doctor_ID, Patient_ID)
+INSERT INTO doctor_patient (Doctor_SSN, Patient_SSN)
 VALUES
     (47, 27),
     (47, 28),

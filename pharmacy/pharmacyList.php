@@ -12,7 +12,7 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 // Get the user information from the session variables
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
-$ID = $_SESSION["user"]["Doctor_SSN"];
+$ID = $_SESSION["user"]["Pharmacy_ID"];
 
 ?>
 
@@ -22,7 +22,7 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-COMPLATIBLE" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial scale=1.0">
-    <title> Doctor View - Add New Patient </title>
+    <title> Pharmacy View - Add New Contract </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -86,7 +86,7 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
                 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                 $offset = ($currentPage - 1) * $resultsPerPage;
 
-                $countQuery = "SELECT COUNT(*) AS total FROM patients";
+                $countQuery = "SELECT COUNT(*) AS total FROM company";
                 $countResult = $conn->query($countQuery);
                 $countRow = $countResult->fetch_assoc();
                 $totalResults = $countRow['total'];
