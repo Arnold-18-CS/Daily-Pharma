@@ -288,6 +288,18 @@ UPDATE prescriptions
 SET Prescribed  = 'Y'
 WHERE Prescription_ID > 10;
 
+UPDATE patients
+SET Status  = 'active'
+WHERE Patient_SSN > 32;
+
+UPDATE doctors
+SET Status  = 'active'
+WHERE Doctor_SSN > 49;
+
+UPDATE contracts
+SET Status  = 'active'
+WHERE Contract_ID > 3;
+
 
 -- --------------------------------------------------------
 
@@ -390,7 +402,7 @@ ALTER TABLE `patients` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER 
 ALTER TABLE `company` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `Password`;
 ALTER TABLE `admin` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
 ALTER TABLE `doctors` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
-ALTER TABLE `contracts` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `End_Status`;
+ALTER TABLE `contracts` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `End_Date`;
 
 
 -- Create the drug_prices table with drug_id, pharmacy_id, and drug_price columns
