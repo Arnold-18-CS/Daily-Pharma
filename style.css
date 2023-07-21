@@ -776,11 +776,9 @@ hr{
 /*Login Section*/
 
 .form{
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
     width: 400px;
 }
 
@@ -907,6 +905,11 @@ label.left{
     height: 350px;
     transition: .5s;
     top: -7%;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .Register{
@@ -914,14 +917,14 @@ label.left{
     height: 150vh;   
 }
 
-.Register.form{
+.Register .form{
     transform: translateX(70px);
     display: flex;
     flex-direction: column;
 }
 
 .form .register_patient,.register_doctor,.register_pharmacy,.register_company{
-    transform: translateY(600PX);
+    transform: translateY(600px);
     transition: 1s ease;
 }
 
