@@ -3,7 +3,6 @@
 
 //establish a php session
 session_start();
-
 // Check if the user is logged in
 if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
     // Redirect to the login page if the user is not logged in
