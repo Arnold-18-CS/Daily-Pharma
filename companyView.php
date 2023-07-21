@@ -1,7 +1,7 @@
 <?php
 // doctorView.php
 
-// Establish a PHP session
+//establish a php session
 session_start();
 
 // Check if the user is logged in
@@ -37,20 +37,25 @@ $user = $_SESSION["user"];
         </div>
 
         <div class="navbar">
-            <nav class="navbar" id="navbar">
+            <nav class= navbar id="navbar">
                 <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="../logout.php" class="btn-login-popup">Logout</a>
+                <a href="../logout.php" class="btn-login-popup" >Logout</a>                
+                </nav>
+                </nav>
+    
             </nav>
     
             <?php
-            echo '<div class="profile">';
-            echo '<a href="../profile.html">';
-            echo '<i class="uil uil-user"></i>'. $username .'';
-            echo '</a>';
-            echo ' </div>';
+                echo '<div class="profile">';
+                echo '<a href="profile.php">';
+                echo '<i class="uil uil-user"></i>'. $username .'';
+                echo '</a>';
+                echo ' </div>';
             ?>
+
+
         </div>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
@@ -60,7 +65,7 @@ $user = $_SESSION["user"];
                 <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="../profile.html">Profile</a><!--Place username here-->
+                <a href="profile.html">Profile</a><!--Place username here-->
                 <a href="../logout.php">Logout</a>
             </div>
         </div>
@@ -74,7 +79,7 @@ $user = $_SESSION["user"];
             <div class="image-slide">
                 <div class="image-desc active">
                     <h2>Manage your Drugs</h2>
-                    <p>Upload and manage the drugs you create.</p>
+                    <p> Upload and manage the drugs you create.</p>
                 </div>
                 <div class="image-desc">
                     <h2>Manage your Contracts with Pharmacies</h2>
@@ -88,12 +93,14 @@ $user = $_SESSION["user"];
         </div>
     </div>
 
+
     <!-- Drugs -->
     <div class="item">
         <div class="title-text">
             <p>Features</p>
             <h1>What do you need?</h1>
         </div>
+
     </div>
 
     <div class="drug_section">
@@ -105,71 +112,113 @@ $user = $_SESSION["user"];
         </div>
 
         <div class="main_content">
+
             <div class="category-content" id="Manage-Drugs">
-            <div class="container my-5">
-                <h2>List of Drugs</h2>            
-                <br>
-                <a class="btn btn-primary" href="adddrugs.php" role="button">Add Drugs</a>
-                <br>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Drugs</th>       
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>               
-                                <td>$row[Drug_Name]</td>
-                                <td>
-                                    <a class='btn btn-danger btn-sm' href='#'>Delete</a>
-                                </td>
+                <div class="container my-5">
+                    <h2>List of Drugs</h2>            
+                    <br>
+                    <a class="btn btn-primary" href="adddrugs.php" role="button">Add Drugs</a>
+                    <br>
+    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Drugs</th>       
                             </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        </thead>
+                        <tbody>
+                        <?php
+                            // Establish a connection to the database
+                                require_once("../connect.php");
 
+                                // Retrieve prescription data from the database
+                                $sql = "SELECT d.Drug_Name
+                                FROM drugs d
+                                INNER JOIN company c ON d.Drug_Company = c.Company_Name;";
+                                 
+                                $result = $conn->query($sql);
 
-                <!-- Example: drug management table -->
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()){
+                                    echo"
+                                    <tr>                                 
+                                     <td>$row[Drug_Name]</td>
+                                     <td>
+                                        <a class='btn btn-danger btn-sm' href='#'>Delete</a>
+                                    </td>
+                                
+                                    </tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="category-content" id="Manage-Contracts">
-            <div class="container my-5">
-                <h2>List of Contracts</h2>            
-                <br>
-                <a class="btn btn-primary" href="#" role="button">Add New Contract</a>
-                <br>
-                <table class="table">
-                    <thead>
-                        <tr>     
-                            <th>Contract ID</th>
-                            <th>Company</th>
-                            <th>Pharmacy</th>
-                            <th>Contract Supervisor</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>               
-                                <td>$row[Contract_ID]</td>
-                                <td>$row[Company_Name]</td>
-                                <td>$row[Pharmacy_Name]</td>
-                                <td>$row[Contract_Supervisor]</td>
-                                <td>$row[Start_Date]</td>
-                                <td>$row[End_Date]</td>
-                                <td>
-                                    <a class='btn btn-danger btn-sm' href='#'>Terminate</a>
-                                </td>
+                <div class="container my-5">
+                    <h2>List of Contracts</h2>            
+                    <br>
+                    <a class="btn btn-primary" href="#" role="button">Add New Contract</a>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>     
+                                <th>Contract ID</th>
+                                <th>Company</th>
+                                <th>Pharmacy</th>
+                                <th>Contract Supervisor</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                             </tr>
-                    </tbody>
-                </table>
-            </div>
-                <!-- Example: contract management table -->
+                        </thead>
+                        <tbody>
+                        <?php
+                            // Establish a connection to the database
+                                require_once("../connect.php");
+
+                                // Retrieve prescription data from the database
+                                $sql = "SELECT cmp.Company_Name, p.Pharmacy_Name, c.Contract_ID, s.Supervisor_Name, c.Start_Date, c.End_Date
+                                FROM contracts c
+                                INNER JOIN company cmp ON c.Company_ID = cmp.Company_ID
+                                INNER JOIN pharmacy p ON c.Pharmacy_ID = p.Pharmacy_ID
+                                INNER JOIN supervisors s ON c.Supervisor_ID = s.Supervisor_ID
+                                ;";
+                                 
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()){
+                                    echo"
+                                    <tr>                                 
+                                          
+                                    <td>$row[Contract_ID]</td>
+                                    <td>$row[Company_Name]</td>
+                                    <td>$row[Pharmacy_Name]</td>
+                                    <td>$row[Supervisor_Name]</td>
+                                    <td>$row[Start_Date]</td>
+                                    <td>$row[End_Date]</td>
+                                    <td>
+                                        <a class='btn btn-danger btn-sm' href='#'>Terminate</a>
+                                    </td>
+                                
+                                    </tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No Contracts found.</td></tr>";
+                                }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     </div>
+
 
     <!--Footer-->
     <section id="footer">
@@ -182,9 +231,37 @@ $user = $_SESSION["user"];
             <div class="footer-left">
                 <h1>Contact information</h1>
                 <div class="contact-link">
-                <div class="contact-info">
-                    <i class="uil uil-twitter"></i>
-                    <span>@DailyPharma</span>
+
+                    <div class="contact-info">
+                        <i class="uil uil-twitter"></i>
+                        <span>@DailyPharma</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-instagram"></i>
+                        <span>@TheDailyPharma</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-facebook"></i>
+                        <span>@DailyPharma</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-linkedin"></i>
+                        <span>@DailyPharma - Medical Website</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-at"></i>
+                        <span>DailyPharma@gmail.com</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-calling"></i>
+                        <span>0769690000</span>
+                    </div>
+
                 </div>
             </div>
 
@@ -192,24 +269,26 @@ $user = $_SESSION["user"];
                 <div class="quick-links">
                     <h1>Quick Links</h1>
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../index.html#service">About Us</a></li>
-                        <li><a href="../index.html#feature">Features</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms and Conditions</a></li>
+                      <li><a href="../index.html">Home</a></li>
+                      <li><a href="../index.html#service">About Us</a></li>
+                      <li><a href="../index.html#feature">Features</a></li>
+                      <li><a href="#">FAQ</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="#">Terms and Conditions</a></li>
                     </ul>
-                </div>
+                  </div>
             </div>
         </div>
 
         <div class="additional-info">
-            <p>&copy; <?php echo date('Y'); ?> DailyPharma. All rights reserved.</p>
+            <p>&copy; 2023 DailyPharma. All rights reserved.</p>
         </div>
     </section>
+
 
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
     <script src="../script4.js"></script>
+    
 </body>
 </html>
