@@ -175,7 +175,7 @@ while ($row = $query->fetch_assoc()) {
                                     <th>Prescription ID</th>
                                     <th>Patient SSN</th>
                                     <th>Doctor SSN</th>
-                                    <th>Drug Name</th>
+                                    <th>Drug ID</th>
                                     <th>Prescription Amount</th>
                                     <th>Prescription Dosage</th>
                                 </tr>
@@ -199,9 +199,6 @@ while ($row = $query->fetch_assoc()) {
                                         echo "<td>" . $row["Drug_ID"] . "</td>";
                                         echo "<td>" . $row["Prescription_Amount"] . "</td>";
                                         echo "<td>" . $row["Prescription_Dosage"] . "</td>";
-                                        echo "<td>";
-                                        echo    "<a class='btn btn-danger btn-sm' href='#'>Dispense</a>";
-                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {

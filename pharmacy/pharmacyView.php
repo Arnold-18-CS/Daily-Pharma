@@ -128,7 +128,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                 <div class="container my-5">
                     <h2>List of Drugs</h2>            
                     <br>
-                    <a class="btn btn-primary" href="#" role="button">Add Drugs</a>
+                    <a class="btn btn-primary" href="adddrugs.php" role="button">Add Drugs</a>
                     <br>
     
                     <table class="table">
@@ -139,15 +139,34 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                             </tr>
                         </thead>
                         <tbody>
-                                <tr>               
-                                    <td>$row[Drug_Name]</td>
-                                    <td>$row[Drug_Price]</td>
+                        <?php
+                            // Establish a connection to the database
+                                require_once("../connect.php");
 
-                                    <td>
-                                        <a class='btn btn-primary btn-sm' href='pharmacyedit.php?name=$row[name]'>Edit</a>
+                                // Retrieve prescription data from the database
+                                $sql = "SELECT d.Drug_Name, dp.Drug_Price
+                                FROM drugs d
+                                INNER JOIN drug_prices dp ON d.drug_id = dp.drug_id
+                                ;";
+                                 
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()){
+                                    echo"
+                                    <tr>                                 
+                                     <td>$row[Drug_Name]</td>
+                                     <td>$row[Drug_Price]</td>
+                                     <td>
                                         <a class='btn btn-danger btn-sm' href='#'>Delete</a>
                                     </td>
-                                </tr>
+                                
+                                    </tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -197,7 +216,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                                     echo "<td>" . $row["End_Date"] . "</td>";
                                     echo "<td>" . $row["Status"] . "</td>";
                                     echo "<td>";
-                                    if ($row["Status"] == 'Active') {
+                                    if ($row["Status"] == 'active') {
                                         echo "<a class='btn btn-danger btn-sm' href='terminate_contract.php?contractID=" . $row["Contract_ID"] . " &email= + " . $row["Supervisor_Email"] ."'>Terminate</a>";
                                     }
                                     echo "</td>";
