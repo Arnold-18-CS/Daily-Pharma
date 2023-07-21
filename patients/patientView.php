@@ -35,6 +35,7 @@ $query = $conn->query("
     INNER JOIN drug_prices dp ON d.Drug_ID = dp.Drug_ID
     INNER JOIN pharmacy p ON dp.Pharmacy_ID = p.Pharmacy_ID
 ");
+
 $drugInformation = array();
 while ($row = $query->fetch_assoc()) {
     $drugInformation[] = $row;
@@ -122,13 +123,12 @@ while ($row = $query->fetch_assoc()) {
 
 
     <!-- Drugs -->
-    <div class="item">
-        <div class="title-text">
+    <div class="item"></div>
+
+    <div class="title-text">
             <p>Drugs</p>
             <h1>What are you looking for?</h1>
-        </div>
     </div>
-
 
     <div class="drug_section">
         <div class="sidebar">
@@ -146,7 +146,7 @@ while ($row = $query->fetch_assoc()) {
                 <select name="availableDrugs" id="availableDrugs">
                     <option value="">Select a drug</option>
                     <?php foreach ($drugInformation as $drug) : ?>
-                        <option value="<?php echo htmlspecialchars($drug['Drug_Name']); ?>"><?php echo htmlspecialchars($drug['Drug_Name'] . ' - ' . $drug['Pharmacy_Name'] . ' - Price: ' . $drug['Drug_Price']); ?></option>
+                        <option value="<?php echo htmlspecialchars($drug['Drug_ID']); ?>" name="<?php echo htmlspecialchars($drug['Drug_Name']);?>"><?php echo htmlspecialchars($drug['Drug_Name'] . ' - ' . $drug['Pharmacy_Name'] . ' - Price: ' . $drug['Drug_Price']); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -181,14 +181,33 @@ while ($row = $query->fetch_assoc()) {
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>               
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                    </tr>
+                            <?php 
+                                // Establish a connection to the database
+                                require_once("../connect.php");
+
+                                // Retrieve prescription data from the database
+                                $sql = "SELECT * FROM prescriptions WHERE Prescribed = 'N' AND `Patient_SSN` = '$patientSSN';";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "</tr>";
+                                        echo "<tr>";                                         
+                                        echo "<td>" . $row["Prescription_ID"]. "</td>";
+                                        echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                        echo "<td>" . $row["Doctor_SSN"]. "</td>";
+                                        echo "<td>" . $row["Drug_ID"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Amount"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Dosage"] . "</td>";
+                                        echo "<td>";
+                                        echo    "<a class='btn btn-danger btn-sm' href='#'>Dispense</a>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
                 </div>
@@ -340,7 +359,7 @@ while ($row = $query->fetch_assoc()) {
             if (selectedDrug) {
                 //convert from php array to js array
                 const drug = <?php echo json_encode($drugInformation); ?>;
-                const selectedDrugInfo = drug.find((item) => item.Drug_Name === selectedDrug);
+                const selectedDrugID = drug.find((item) => item.Drug_ID === selectedDrug);
                 
                 fetch("store_selected_drug.php", {
                     method: "POST",
@@ -350,12 +369,12 @@ while ($row = $query->fetch_assoc()) {
                 .then(data => {
                     console.log(data.message);
                 });
-                if (selectedDrugInfo) {
-                    drugNameParagraph.textContent = "Drug Name: " + selectedDrugInfo.Drug_Name;
-                    drugPriceParagraph.textContent = "Price: " + selectedDrugInfo.Drug_Price;
-                    drugDescriptionParagraph.textContent = "Description: " + selectedDrugInfo.Drug_Description;
-                    drugManufacturingDateParagraph.textContent = "Manufacturing Date: " + selectedDrugInfo.Drug_Manufacturing_Date;
-                    drugExpirationDateParagraph.textContent = "Expiration Date: " + selectedDrugInfo.Drug_Expiration_Date;
+                if (selectedDrugID) {
+                    drugNameParagraph.textContent = "Drug Name: " + selectedDrugID.Drug_Name;
+                    drugPriceParagraph.textContent = "Price: " + selectedDrugID.Drug_Price;
+                    drugDescriptionParagraph.textContent = "Description: " + selectedDrugID.Drug_Description;
+                    drugManufacturingDateParagraph.textContent = "Manufacturing Date: " + selectedDrugID.Drug_Manufacturing_Date;
+                    drugExpirationDateParagraph.textContent = "Expiration Date: " + selectedDrugID.Drug_Expiration_Date;
                     drugInfoDiv.style.display = "block";
                 } else {
                     drugInfoDiv.style.display = "none";

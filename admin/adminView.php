@@ -3,16 +3,18 @@
 
 //establish a php session
 session_start();
+
 // Check if the user is logged in
 if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
     // Redirect to the login page if the user is not logged in
-    header("Location: login.html");
+    header("Location: ../login.html");
     exit;
 }
 
 // Get the user information from the session variables
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
+$ID = $_SESSION["user"]["Admin_ID"];
 
 ?>
 
@@ -24,10 +26,10 @@ $user = $_SESSION["user"];
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title> DailyPharma - Pharmacy Home</title>
 </head>
-<body class="PharmacyView">
+<body class="AdminView">
 
     <!--Header-->
     <header>
@@ -40,7 +42,7 @@ $user = $_SESSION["user"];
                 <a href="index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="login.html" class="btn-login-popup" >Logout</a>                
+                <a href="../logout.php" class="btn-login-popup" >Logout</a>                
             </nav>
 
             <?php
@@ -62,7 +64,7 @@ $user = $_SESSION["user"];
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="login.html">Logout</a>
+                <a href="../logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -74,258 +76,282 @@ $user = $_SESSION["user"];
         <div class="content">
             <div class="image-slide">
                 <div class="image-desc active">
-                    <h2>Manage your Drugs</h2>
-                    <p> Upload and manage the drugs you sell to patients.</p>
+                    <h2>Manage Our Users</h2>
+                    <p> Manage the users in our system.</p>
                 </div>
-                <div class="image-desc">
-                    <h2>Manage your Contracts with Pharmaceutical Companies</h2>
-                    <p>Make and stop contracts to supply various pharmaceutical companies.</p>
-                </div>
-                <div class="image-desc">
-                    <h2>Hand Out Doctor-Prescriptions</h2>
-                    <p>Give the drugs prescribed by doctors to patients.</p>
-                </div>
-                <div class="image-desc">
-                    <h2>Online Over-the-Counter Drugs</h2>
-                    <p>Supply patients with drugs they ordered online.</p>
-                </div>
-            </div>
-            <div class="arrow-buttons">
-                <div class="arrow-left"><i class="uil uil-angle-left-b"></i></div>
-                <div class="arrow-right"><i class="uil uil-angle-right-b"></i></div>
             </div>
         </div>
     </div>
 
 
-    <!-- Drugs -->
-    <div class="item">
+    <div class="item"></div>
         <div class="title-text">
-            <p>Features</p>
-            <h1>What do you need?</h1>
+            <p>Users</p>
+            <h1>Who uses our system?</h1>
         </div>
 
-    </div>
+        <div class="container my-5" id="about">
+            <h2>List of Patients</h2>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SSN</th>       
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Gender</th>                   
+                        <th>Age</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
 
-    <div class="drug_section">
-        <div class="sidebar">
-            <ul class="category-list">
-                <li class="category-item active" data-category="Manage-Drugs">MANAGE DRUGS</li>
-                <li class="category-item" data-category="Manage-Contracts">MANAGE CONTRACTS</li>
-                <li class="category-item" data-category="Manage-Prescriptions">PENDING PRESCRIPTIONS</li>
-                <li class="category-item" data-category="Prescription-History">PRESCRIPTION HISTORY </li>
-                <li class="category-item" data-category="Online-Orders">ONLINE ORDERS</li>
+                    require_once("../connect.php");
 
-            </ul>
+                    $resultsPerPage = 5;
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $offset = ($currentPage - 1) * $resultsPerPage;
+
+                    $countQuery = "SELECT COUNT(*) AS total FROM patients";
+                    $countResult = $conn->query($countQuery);
+                    $countRow = $countResult->fetch_assoc();
+                    $totalResults = $countRow['total'];
+                    $totalPages = ceil($totalResults / $resultsPerPage);
+
+                    $sql = "SELECT * FROM patients LIMIT $offset, $resultsPerPage";
+                    $result = $conn->query($sql);
+
+                    if (!$result) {
+                        die("Invalid query: " . $conn->error);
+                    }
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
+                        <tr>
+                            <td>$row[Patient_SSN]</td>                
+                            <td>$row[Patient_Name]</td>
+                            <td>$row[Patient_Email]</td>
+                            <td>$row[Patient_Phone]</td>
+                            <td>$row[Patient_Gender]</td>
+                            <td>$row[Patient_Age]</td>
+                            <td>$row[Status]</td>
+                        </tr>
+                        ";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    $activeClass = ($i == $currentPage) ? 'active' : '';
+                    echo "<li class='page-item $activeClass'><a class='page-link' href='adminView.php?page=$i'>$i</a></li>";
+                }
+                ?>
+                </ul>
+            </nav>
         </div>
 
-        <div class="main_content">
+        <div class="item"></div>
 
-            <div class="category-content" id="Manage-Drugs">
-                <div class="container my-5">
-                    <h2>List of Drugs</h2>            
-                    <br>
-                    <a class="btn btn-primary" href="#" role="button">Add Drugs</a>
-                    <br>
-    
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Drug Name</th>       
-                                <th>Drug Price</th>       
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>               
-                                    <td>$row[Drug_Name]</td>
-                                    <td>$row[Drug_Price]</td>
+        <div class="container my-5" id="about">
+            <h2>List of Doctors</h2>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SSN</th>       
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Speciality</th>
+                        <th>Experience</th>                   
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
 
-                                    <td>
-                                        <a class='btn btn-primary btn-sm' href='pharmacyedit.php?name=$row[name]'>Edit</a>
-                                        <a class='btn btn-danger btn-sm' href='#'>Delete</a>
-                                    </td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    require_once("../connect.php");
 
-            <div class="category-content" id="Manage-Contracts">
-                <div class="container my-5">
-                    <h2>List of Contracts</h2>            
-                    <br>
-                    <a class="btn btn-primary" href="#" role="button">Add New Contract</a>
-                    <br>
-                    <table class="table">
-                        <thead>
-                            <tr>     
-                                <th>Contract ID</th>
-                                <th>Company</th>
-                                <th>Pharmacy</th>
-                                <th>Contract Supervisor</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>               
-                                    <td>$row[Contract_ID]</td>
-                                    <td>$row[Company_Name]</td>
-                                    <td>$row[Pharmacy_Name]</td>
-                                    <td>$row[Contract_Supervisor]</td>
-                                    <td>$row[Start_Date]</td>
-                                    <td>$row[End_Date]</td>
-                                    <td>
-                                        <a class='btn btn-danger btn-sm' href='#'>Terminate</a>
-                                    </td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    $resultsPerPage = 5;
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $offset = ($currentPage - 1) * $resultsPerPage;
 
-            <div class="category-content" id="Manage-Prescriptions">
-                <div class="container my-5">
-                    <h2>Pending Prescriptions</h2> 
-                        <form method="GET" action="search_prescription.php">
-                            <div class="search-container">
-                                <label for="patient_ssn">Search Prescription by Patient SSN:</label>
-                                <input type="text" id="patient_ssn" name="patient_ssn" required>
-                                <input type="submit" value="Search">
-                            </div>
-                        </form>
+                    $countQuery = "SELECT COUNT(*) AS total FROM doctors";
+                    $countResult = $conn->query($countQuery);
+                    $countRow = $countResult->fetch_assoc();
+                    $totalResults = $countRow['total'];
+                    $totalPages = ceil($totalResults / $resultsPerPage);
 
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Prescription ID</th>
-                                    <th>Patient SSN</th>
-                                    <th>Doctor SSN</th>
-                                    <th>Drug Name</th>
-                                    <th>Presciption Amount</th>
-                                    <th>Prescription Dosage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                        <td>
-                                            <a class='btn btn-danger btn-sm' href='#'>Dispense</a>
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table>
+                    $sql = "SELECT * FROM doctors LIMIT $offset, $resultsPerPage";
+                    $result = $conn->query($sql);
 
-  <!-- <table>
-        <tr>
-            <th>Prescription ID</th>
-            <th>Patient SSN</th>
-            <th>Doctor SSN</th>
-            <th>Drug Name</th>
-            <th>Prescription Amount</th>
-            <th>Prescription Dosage</th>
-        </tr>
+                    if (!$result) {
+                        die("Invalid query: " . $conn->error);
+                    }
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
+                        <tr>
+                            <td>$row[Doctor_SSN]</td>                
+                            <td>$row[Doctor_Name]</td>
+                            <td>$row[Doctor_Phone]</td>
+                            <td>$row[Doctor_Speciality]</td>
+                            <td>$row[Doctor_Experience]</td>
+                            <td>$row[Status]</td>
+                        </tr>
+                        ";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    $activeClass = ($i == $currentPage) ? 'active' : '';
+                    echo "<li class='page-item $activeClass'><a class='page-link' href='adminView.php?page=$i'>$i</a></li>";
+                }
+                ?>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="item"></div>
+        <div class="container my-5" id="about">
+            <h2>List of Pharmacies</h2>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>       
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>                   
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+
+                    require_once("../connect.php");
+
+                    $resultsPerPage = 5;
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $offset = ($currentPage - 1) * $resultsPerPage;
+
+                    $countQuery = "SELECT COUNT(*) AS total FROM pharmacy";
+                    $countResult = $conn->query($countQuery);
+                    $countRow = $countResult->fetch_assoc();
+                    $totalResults = $countRow['total'];
+                    $totalPages = ceil($totalResults / $resultsPerPage);
+
+                    $sql = "SELECT * FROM pharmacy LIMIT $offset, $resultsPerPage";
+                    $result = $conn->query($sql);
+
+                    if (!$result) {
+                        die("Invalid query: " . $conn->error);
+                    }
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
+                        <tr>
+                            <td>$row[Pharmacy_ID]</td>                
+                            <td>$row[Pharmacy_Name]</td>
+                            <td>$row[Pharmacy_Email]</td>
+                            <td>$row[Pharmacy_Phone]</td>
+                            <td>$row[Pharmacy_Address]</td>
+                            <td>$row[Status]</td>
+                        </tr>
+                        ";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    $activeClass = ($i == $currentPage) ? 'active' : '';
+                    echo "<li class='page-item $activeClass'><a class='page-link' href='adminView.php?page=$i'>$i</a></li>";
+                }
+                ?>
+                </ul>
+            </nav>
+        </div>
         
-         <?php 
-        // Establish a connection to the database
-        require_once("connect.php");
+        <div class="item"></div>
+        
+        <div class="container my-5" id="about">
+            <h2>List of Companies</h2>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>       
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
 
-        // Retrieve prescription data from the database
-        $sql = "SELECT * FROM prescriptions";
-        $result = $conn->query($sql);
+                    require_once("../connect.php");
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                $row["Prescription_ID"];
-                $row["Patient_SSN"];
-                $row["Doctor_SSN"];
-                $row["Drug_Name"];
-                $row["Prescription_Amt"];
-                $row["Prescription_Dosage"];
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
-        }
+                    $resultsPerPage = 5;
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $offset = ($currentPage - 1) * $resultsPerPage;
 
-        // Close the database connection
-        $conn->close();
-         ?>
-    </table>-->
-                </div>
-            </div>
+                    $countQuery = "SELECT COUNT(*) AS total FROM company";
+                    $countResult = $conn->query($countQuery);
+                    $countRow = $countResult->fetch_assoc();
+                    $totalResults = $countRow['total'];
+                    $totalPages = ceil($totalResults / $resultsPerPage);
 
-            <div class="category-content" id="Prescription-History">
-                <div class="container my-5">
-                    <h2>Prescription History</h2> 
-                        <form method="GET" action="#">
-                            <div class="search-container">
-                                <label for="patient_ssn">Search Prescription by Patient SSN:</label>
-                                <input type="text" id="patient_ssn" name="patient_ssn" required>
-                                <input type="submit" value="Search">
-                            </div>
-                        </form>
+                    $sql = "SELECT * FROM company LIMIT $offset, $resultsPerPage";
+                    $result = $conn->query($sql);
 
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Prescription ID</th>
-                                    <th>Patient SSN</th>
-                                    <th>Doctor SSN</th>
-                                    <th>Drug Name</th>
-                                    <th>Prescription Amount</th>
-                                    <th>Prescription Dosage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>               
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                    </tr>
-                            </tbody>
-                        </table>
-                </div>
-            </div>
+                    if (!$result) {
+                        die("Invalid query: " . $conn->error);
+                    }
 
-            <div class="category-content" id="Online-Orders">
-                <div class="container my-5">
-                    <h2>List of Orders</h2> 
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Patient SSN</th>
-                                    <th>Patient Address</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>               
-                                        <td>$row["Order_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Patient_Address"]</td>
-                                        <td>
-                                            <a class="btn btn-primary" href="#" role="button">Send</a>
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table>
-                </div>
-            </div>
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
+                        <tr>
+                            <td>$row[Company_ID]</td>                
+                            <td>$row[Company_Name]</td>
+                            <td>$row[Company_Email]</td>
+                            <td>$row[Company_Phone]</td>
+                            <td>$row[Status]</td>
+                        </tr>
+                        ";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    $activeClass = ($i == $currentPage) ? 'active' : '';
+                    echo "<li class='page-item $activeClass'><a class='page-link' href='adminView.php?page=$i'>$i</a></li>";
+                }
+                ?>
+                </ul>
+            </nav>
         </div>
-    </div>
+
+
 
 
     <!--Footer-->

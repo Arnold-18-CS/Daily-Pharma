@@ -4,9 +4,9 @@
 session_start();
 
 //establish a connection
-require_once("connect.php");
+require_once("../connect.php");
 
-//creating a variable to hold errors that may occur uppon login
+//creating a variable to hold errors that may occur upon login
 $error = '';
 
 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($error)) {
 
         //retrieve user details from the database
-        if ($query = $conn->prepare("SELECT * FROM `admin` WHERE `Admin_ID` = '?' AND `Status` = 'active'")) {
+        if ($query = $conn->prepare("SELECT * FROM `admin` WHERE `Admin_ID` = ? AND `Status` = 'active'")) {
             $query->bind_param('i', $adminID);
             $query->execute();
             $row = $query->get_result()->fetch_assoc();
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($row) {
 
                 //tests if the entered password matches that in the database
-                if (hash_equals($password, $row['Password'])) {
+                if ($password == $row['Password']){
                     $_SESSION["userid"] = $row['Admin_Name'];
                     $_SESSION["user"] = $row;
             
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $error .= 'The password is not valid.';
                 }
             } else {
-                $error .= 'No user exists with that Admin or Account has been deactivated. Please try again or contact us via DailyPharma.gmail.com';
+                $error .= 'No user exists with that Admin_ID or Account has been deactivated. Please try again or contact us via DailyPharma.gmail.com';
             }
         }
     }
@@ -51,8 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Check if there is an error, and if so, display an alert
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = 'login.html';</script>";
-    exit;
+    echo "<script>window.location.href = '../login.html';</script>";
 }
 
 ?>
