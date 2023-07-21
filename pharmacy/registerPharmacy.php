@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $query = $conn->prepare("INSERT INTO `pharmacy`(`Pharmacy_Name`, `Pharmacy_Email`, `Pharmacy_Phone`, `Pharmacy_Address`, `Password`) VALUES (?, ?, ?, ?, ?)");
         $query->bind_param('ssiss', $pharmacyName, $pharmacyEmail, $pharmacyPhone, $pharmacyAddress, $password);
         if ($query->execute()) {
-            // Registration successful, redirect to login page
-            header("Location: ../login.html");
+            $pharmacyID = mysqli_insert_id($conn);
+            echo "<script>alert('Your Pharmacy ID: $pharmacyID'); window.location.href = '../login.html';</script>";
             exit;
         } else {
             $error = 'Error registering the user. Please try again later.';
@@ -42,9 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } 
 
 if(!empty($error)){
-    // Display the error message as an alert
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = '../register.php';</script>";
+    echo "<script>window.location.href = '../register.html';</script>";
     exit;
 }
 
