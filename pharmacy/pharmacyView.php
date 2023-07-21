@@ -272,7 +272,7 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                                         echo "<td>" . $row["Prescription_Amount"] . "</td>";
                                         echo "<td>" . $row["Prescription_Dosage"] . "</td>";
                                         echo "<td>";
-                                        echo    "<a class='btn btn-danger btn-sm' href='#'>Dispense</a>";
+                                        echo    "<a class='btn btn-danger btn-sm' href='dispenseDrug.php?ID=" . $row["Prescription_ID"] ."'>Dispense</a>";
                                         echo "</td>";
                                         echo "</tr>";
                                     }
