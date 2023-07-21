@@ -914,8 +914,10 @@ label.left{
     height: 150vh;   
 }
 
-.Register .form{
+.Register.form{
     transform: translateX(70px);
+    display: flex;
+    flex-direction: column;
 }
 
 .form .register_patient,.register_doctor,.register_pharmacy,.register_company{
