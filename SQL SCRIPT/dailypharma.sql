@@ -110,32 +110,6 @@ VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `doctor_patient`
---
-CREATE TABLE `doctor_patient` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `Doctor_SSN` INT(10) NOT NULL,
-  `Patient_SSN` INT(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`Doctor_SSN`) REFERENCES doctors (`Doctor_SSN`),
-  FOREIGN KEY (`Patient_SSN`) REFERENCES patients (`Patient_SSN`)
-);
-
-INSERT INTO `doctor_patient` ( `Doctor_SSN`, `Patient_SSN`)
-VALUES
-    (47, 27),
-    (47, 28),
-    (47, 29),
-    (47, 30),
-    (47, 31),
-    (47, 32),
-    (47, 33),
-    (42, 34),
-    (42, 35);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `drugs`
 --
 
@@ -146,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `drugs` (
   `Drug_Quantity` INT(4) NOT NULL,
   `Drug_Expiration_Date` DATE DEFAULT NULL,
   `Drug_Manufacturing_Date` DATE DEFAULT NULL,
-  `Drug_Company` VARCHAR(50) NOT NULL,
+  `Drug_Company` INT(10) NOT NULL,
   PRIMARY KEY (`Drug_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -155,16 +129,16 @@ CREATE TABLE IF NOT EXISTS `drugs` (
 --
 
 INSERT INTO `drugs` (`Drug_Name`, `Drug_Description`, `Drug_Quantity`, `Drug_Expiration_Date`, `Drug_Manufacturing_Date`, `Drug_Company`) VALUES
-('Paracetamol', 'Fever reducer', 311, '2023-11-30', '2023-03-01', 'HealthMeds'),
-('Metformin', 'Diabetes medication', 60, '2024-04-30', '2023-10-01', 'Pharmagen'),
-('Aspirin', 'Pain reliever', 150, '2023-12-31', '2023-01-01', 'HealthMeds'),
-('Simvastatin', 'Cholesterol medication', 25, '2024-03-31', '2023-07-15', 'Pharmagen'),
-('Metoprolol', 'Beta blocker', 50, '2024-01-31', '2023-06-15', 'HealthMeds'),
-('Warfarin', 'Blood thinner', 20, '2024-04-30', '2023-10-01', 'Pharmagen'),
-('Loratadine', 'Antihistamine', 200, '2023-12-31', '2023-01-01', 'HealthMeds'),
-('Citalopram', 'Antidepressant', 30, '2024-03-31', '2023-07-15', 'Pharmaco Inc.'),
-('Aspirin', 'Pain reliever and fever reducer', 80, '2023-10-31', '2022-07-20', 'ABC Pharmaceuticals'),
-('Cetirizine', 'Antihistamine for allergies', 120, '2023-09-30', '2022-05-10', 'XYZ Pharmaceuticals');
+('Paracetamol', 'Fever reducer', 311, '2023-11-30', '2023-03-01', '1'),
+('Metformin', 'Diabetes medication', 60, '2024-04-30', '2023-10-01', '1'),
+('Aspirin', 'Pain reliever', 150, '2023-12-31', '2023-01-01', '5'),
+('Simvastatin', 'Cholesterol medication', 25, '2024-03-31', '2023-07-15', '2'),
+('Metoprolol', 'Beta blocker', 50, '2024-01-31', '2023-06-15', '2'),
+('Warfarin', 'Blood thinner', 20, '2024-04-30', '2023-10-01', '2'),
+('Loratadine', 'Antihistamine', 200, '2023-12-31', '2023-01-01', '2'),
+('Citalopram', 'Antidepressant', 30, '2024-03-31', '2023-07-15', '2'),
+('Aspirin', 'Pain reliever and fever reducer', 80, '2023-10-31', '2022-07-20', '2'),
+('Cetirizine', 'Antihistamine for allergies', 120, '2023-09-30', '2022-05-10', '1');
 
 -- --------------------------------------------------------
 
@@ -208,6 +182,33 @@ VALUES
 (36, 'James', '678 Walnut Dr', 'jameswilson@yahoo.com', 2147483647, 'Male', '1986-06-13', 35, NULL, 'password14'),
 (37, 'Ava', '987 Spruce St', 'avadavis@gmail.com', 2147483647, 'Female', '1995-03-20', 27, NULL, 'password15'),
 (38, 'Emma', '345 Elm St', 'emmamartin@hotmail.com', 2147483647, 'Female', '1993-12-25', 28, NULL, 'password16');
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_patient`
+--
+CREATE TABLE `doctor_patient` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `Doctor_SSN` INT(10) NOT NULL,
+  `Patient_SSN` INT(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`Doctor_SSN`) REFERENCES doctors (`Doctor_SSN`),
+  FOREIGN KEY (`Patient_SSN`) REFERENCES patients (`Patient_SSN`)
+);
+
+INSERT INTO `doctor_patient` ( `Doctor_SSN`, `Patient_SSN`)
+VALUES
+    (47, 27),
+    (47, 28),
+    (47, 29),
+    (47, 30),
+    (47, 31),
+    (47, 32),
+    (47, 33),
+    (42, 34),
+    (42, 35);
 
 -- --------------------------------------------------------
 
@@ -282,23 +283,6 @@ VALUES
 (25, 26, 8, '20 mg', '1 time daily', 'Take with or without food', 'N'),
 (25, 27, 9, '100 mg', '1 time daily', 'Take after meals', 'N'),
 (25, 42, 10, '10 mg', '1 time daily', 'Take with water', 'N');
-
-
-UPDATE prescriptions
-SET Prescribed  = 'Y'
-WHERE Prescription_ID > 10;
-
-UPDATE patients
-SET Status  = 'active'
-WHERE Patient_SSN > 32;
-
-UPDATE doctors
-SET Status  = 'active'
-WHERE Doctor_SSN > 49;
-
-UPDATE contracts
-SET Status  = 'active'
-WHERE Contract_ID > 3;
 
 
 -- --------------------------------------------------------
@@ -404,6 +388,22 @@ ALTER TABLE `admin` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Pa
 ALTER TABLE `doctors` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Active' AFTER `Password`;
 ALTER TABLE `contracts` ADD `Status` VARCHAR(50) NOT NULL DEFAULT 'Pending' AFTER `End_Date`;
 
+UPDATE prescriptions
+SET Prescribed  = 'Y'
+WHERE Prescription_ID > 10;
+
+UPDATE patients
+SET Status  = 'active'
+WHERE Patient_SSN > 32;
+
+UPDATE doctors
+SET Status  = 'active'
+WHERE Doctor_SSN > 49;
+
+UPDATE contracts
+SET Status  = 'active'
+WHERE Contract_ID > 3;
+
 
 -- Create the drug_prices table with drug_id, pharmacy_id, and drug_price columns
 CREATE TABLE drug_prices (
@@ -439,11 +439,7 @@ INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
 VALUES
   ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Loratadine'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'ABC Pharmacy'), 7.50);
   
-  -- Drug: Aspirin, Pharmacy: ABC Pharmaceuticals
-  INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
-  VALUES
-    ((SELECT Drug_ID FROM drugs WHERE Drug_Name = 'Aspirin'), (SELECT Pharmacy_ID FROM pharmacy WHERE Pharmacy_Name = 'ABC Pharmacy'), 6.99);
-  COMMIT;
+    COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

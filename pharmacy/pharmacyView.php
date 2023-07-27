@@ -12,9 +12,9 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 }
 
 // Get the user information from the session variables
-$username = $_SESSION["userid"];
+$ID = $_SESSION["userid"];
 $user = $_SESSION["user"];
-$ID = $_SESSION["user"]["Pharmacy_ID"];
+$username = $_SESSION["user"]["Pharmacy_Name"];
 
 ?>
 
@@ -144,9 +144,12 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                                 require_once("../connect.php");
 
                                 // Retrieve prescription data from the database
-                                $sql = "SELECT d.Drug_Name, dp.Drug_Price
-                                FROM drugs d
-                                INNER JOIN drug_prices dp ON d.drug_id = dp.drug_id
+                                $sql = "
+                                SELECT dp.Drug_ID, d.Drug_Name, dp.Drug_Price, p.Pharmacy_ID
+                                FROM drug_prices dp
+                                INNER JOIN drugs d ON d.Drug_ID = dp.Drug_ID
+                                INNER JOIN pharmacy p ON p.Pharmacy_ID = dp.Pharmacy_ID
+                                WHERE p.Pharmacy_ID = '$ID'
                                 ;";
                                  
                                 $result = $conn->query($sql);
@@ -158,13 +161,13 @@ $ID = $_SESSION["user"]["Pharmacy_ID"];
                                      <td>$row[Drug_Name]</td>
                                      <td>$row[Drug_Price]</td>
                                      <td>
-                                        <a class='btn btn-danger btn-sm' href='#'>Delete</a>
+                                        <a class='btn btn-danger btn-sm' href='confirmDeleteDrug.php?id=" . $row["Drug_ID"] . "'>Delete</a>
                                     </td>
                                 
                                     </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                    echo "<tr><td colspan='6'>No drugs in stock.</td></tr>";
                                 }
                         ?>
                         </tbody>

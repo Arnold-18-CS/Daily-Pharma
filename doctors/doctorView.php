@@ -126,6 +126,7 @@ $ID = $_SESSION["user"]["Doctor_SSN"];
                                 <th>Phone</th>
                                 <th>Gender</th>
                                 <th>Age</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 

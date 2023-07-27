@@ -11,11 +11,11 @@ if (isset($_GET["id"]) && isset($_GET["patientID"])) {
         $deleteQuery = "DELETE FROM doctor_patient WHERE Doctor_SSN = '$doctorID' AND Patient_SSN = '$patientID'";
 
         if ($conn->query($deleteQuery) === TRUE) {
-            echo "<script>alert('Successful addition of new patient')
+            echo "<script>alert('Successful deletion of patient')
             window.location.href = 'doctorView.php';
             </script>";
         } else {
-            echo "<script>alert('Error in addition of new patient. Try Again')
+            echo "<script>alert('Error in deletion of new patient. Try Again')
             window.location.href = 'doctorView.php';
             </script>";
         }

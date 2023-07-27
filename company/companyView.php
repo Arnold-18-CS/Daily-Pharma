@@ -12,8 +12,9 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 }
 
 // Get the user information from the session variables
-$username = $_SESSION["userid"];
+$ID = $_SESSION["userid"];
 $user = $_SESSION["user"];
+$username = $_SESSION["user"]["Company_Name"];
 
 ?>
 
@@ -123,16 +124,43 @@ $user = $_SESSION["user"];
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Drugs</th>       
+                                <th>Drug</th>
+                                <th>Drug Description</th>
+                                <th>Drug Expiration Date</th>
+                                <th>Drug Manufacturing Date</th>       
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                                <tr>               
+                        <?php
+                            require_once("../connect.php");
+
+                            $sql = "
+                            SELECT * 
+                            FROM drugs d
+                            WHERE d.Drug_Company = '$ID'
+                            ;";
+                                
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()){
+                                echo"
+                                <tr>                                 
                                     <td>$row[Drug_Name]</td>
+                                    <td>$row[Drug_Description]</td>
+                                    <td>$row[Drug_Expiration_Date]</td>
+                                    <td>$row[Drug_Manufacturing_Date]</td>
                                     <td>
-                                        <a class='btn btn-danger btn-sm' href='#'>Delete</a>
-                                    </td>
-                                </tr>
+                                    <a class='btn btn-danger btn-sm' href='confirmDeleteDrug.php?id=" . $row["Drug_ID"] . "'>Delete</a>
+                                </td>
+                            
+                                </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='6'>No drugs in stock.</td></tr>";
+                            }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -142,7 +170,7 @@ $user = $_SESSION["user"];
                 <div class="container my-5">
                     <h2>List of Contracts</h2>            
                     <br>
-                    <a class="btn btn-primary" href="#" role="button">Add New Contract</a>
+                    <a class="btn btn-primary" href="pharmacyList.php" role="button">Add New Contract</a>
                     <br>
                     <table class="table">
                         <thead>
@@ -153,20 +181,42 @@ $user = $_SESSION["user"];
                                 <th>Contract Supervisor</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                                <tr>               
-                                    <td>$row[Contract_ID]</td>
-                                    <td>$row[Company_Name]</td>
-                                    <td>$row[Pharmacy_Name]</td>
-                                    <td>$row[Contract_Supervisor]</td>
-                                    <td>$row[Start_Date]</td>
-                                    <td>$row[End_Date]</td>
-                                    <td>
-                                        <a class='btn btn-danger btn-sm' href='#'>Terminate</a>
-                                    </td>
-                                </tr>
+                        <?php   
+                            
+                            require_once("../connect.php");
+
+                            $result = $conn->query("
+                            SELECT c.Contract_ID, cmp.Company_Name, p.Pharmacy_Name, s.Supervisor_Name, s.Supervisor_Email, c.Start_Date, c.End_Date, c.Status
+                            FROM contracts c
+                            INNER JOIN company cmp ON c.Company_ID = cmp.Company_ID
+                            INNER JOIN supervisors s ON c.Supervisor_ID = s.Supervisor_ID
+                            INNER JOIN pharmacy p ON c.Pharmacy_ID = p.Pharmacy_ID
+                            WHERE c.Company_ID = '$ID'");
+
+                            // Display the contracts data in the table
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["Contract_ID"] . "</td>";
+                                    echo "<td>" . $row["Company_Name"] . "</td>";
+                                    echo "<td>" . $row["Pharmacy_Name"] . "</td>";
+                                    echo "<td>" . $row["Supervisor_Name"] . "</td>";
+                                    echo "<td>" . $row["Start_Date"] . "</td>";
+                                    echo "<td>" . $row["End_Date"] . "</td>";
+                                    echo "<td>" . $row["Status"] . "</td>";
+                                    echo "<td>";
+                                    if ($row["Status"] == 'Active') {
+                                        echo "<a class='btn btn-danger btn-sm' href='terminate_contract.php?contractID=" . $row["Contract_ID"] . " &email= + " . $row["Supervisor_Email"] ."'>Terminate</a>";
+                                    }
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
