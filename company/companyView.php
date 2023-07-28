@@ -124,7 +124,8 @@ $username = $_SESSION["user"]["Company_Name"];
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Drug</th>
+                                <th>Drug ID</th>
+                                <th>Drug Name</th>
                                 <th>Drug Description</th>
                                 <th>Drug Expiration Date</th>
                                 <th>Drug Manufacturing Date</th>       
@@ -147,6 +148,7 @@ $username = $_SESSION["user"]["Company_Name"];
                                 while ($row = $result->fetch_assoc()){
                                 echo"
                                 <tr>                                 
+                                    <td>$row[Drug_ID]</td>
                                     <td>$row[Drug_Name]</td>
                                     <td>$row[Drug_Description]</td>
                                     <td>$row[Drug_Expiration_Date]</td>

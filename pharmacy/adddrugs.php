@@ -26,7 +26,14 @@ if (empty($error)) {
     $result = $conn->query($checkQuery);
 
     if ($result->num_rows > 0) {
-        $error = "This drug already exists in your list.";
+        echo "<script>alert('This drug already exists in your list, thus its details will be updated instead.')</script>";
+        $updateQuery = "UPDATE drug_prices SET Drug_Price = '$drug_price' WHERE Drug_ID = '$drug_id' AND Pharmacy_ID = '$ID'";
+        if ($conn->query($updateQuery) === TRUE) {
+            echo "<script>alert('Drug price details updated successfully.')</script>";
+        } else {
+            $error = "Error updating drug price details: " . $conn->error;
+        }
+
     } else {
         $insertQuery = "INSERT INTO drug_prices (Drug_ID, Pharmacy_ID, Drug_Price)
                         VALUES ('$drug_id', '$ID', '$drug_price')";
