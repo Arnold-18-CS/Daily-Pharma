@@ -13,7 +13,7 @@ sleep(1);
     <script>
         setTimeout(function() {
             window.location.href = 'index.html';
-        }, 4000); // 5 seconds delay in milliseconds
+        }, 5000); // 5 seconds delay in milliseconds
     </script>
 </head>
 <body>

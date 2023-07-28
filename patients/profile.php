@@ -104,13 +104,13 @@ $age = $row["Patient_Age"];
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form label">DO</label>
+                <label class="col-sm-3 col-form label">DOB</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="Patient_DOB" value="<?php echo $dob?>"readonly>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form label">Experience</label>
+                <label class="col-sm-3 col-form label">Age</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="Patient_Age" value="<?php echo $age?>"readonly>
                 </div>

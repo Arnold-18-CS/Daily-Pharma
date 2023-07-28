@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   background-image: none;
-  background-color: #d3d2d2;
+  background-color: #333;
   font-family: 'Montserrat', sans-serif;
   overflow: hidden;
 }
@@ -20,7 +20,7 @@ body {
   width: 100%;
   max-width: 520px;
   text-align: center;
-  color: #52eb83;
+  color: #fff;
   position: relative;
   margin: 0 32px;
   
@@ -101,3 +101,20 @@ body {
   }
 }
 
+
+.socials {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.social-link {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 12px;
+}
