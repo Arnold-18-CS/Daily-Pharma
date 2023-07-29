@@ -1,10 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "users";
-// create connection
-$connection = new mysqli($servername, $username, $password, $database);
+session_start();
+require_once("../connect.php");
 
 $SSN = "";
 $Name = "";
@@ -12,7 +8,7 @@ $Email = "";
 $Phone = "";
 $Address = "";
 $DOB = "";
-$Physician = "";
+$Status = "";
 
 $errorMessage = "";
 $successMessage = "";
@@ -21,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Get method shows the data of the client
 
     if (!isset($_GET["SSN"])) {
-        header("location: /users/patientcreate.php");
+        header("location: adminView.php");
         exit;
     }
 
@@ -29,56 +25,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // read the row of the selected patient from the database 
     $sql = "SELECT * FROM patients WHERE Patient_SSN = '$SSN'";
-    $result = $connection->query($sql);
+    $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
     if (!$row) {
-        header("location: /users/patientcreate.php");
+        header("location: /adminView.php");
         exit();
     }
 
     $SSN = $row["Patient_SSN"];
     $Name = $row["Patient_Name"];
-    $Email = $row["Patient_Email"];
-    $Phone = $row["Patient_Phone"];
-    $Address = $row["Patient_Address"];
-    $DOB = $row["Patient_Ages"];
-    $Physician = $row["Patient_Physician"];
+    // $Email = $row["Patient_Email"];
+    // $Phone = $row["Patient_Phone"];
+    // $Address = $row["Patient_Address"];
+    // $DOB = $row["Patient_Age"];
+    $Status = $row["Status"];
 } else {
     // POST method: Update the data of the patient
     $SSN = $_POST["SSN"];
     $Name = $_POST["Name"];
-    $Email = $_POST["Email"];
-    $Phone = $_POST["Phone"];
-    $Address = $_POST["Address"];
-    $DOB = $_POST["DOB"];
-    $Physician = $_POST["Physician"];
+    // $Email = $_POST["Email"];
+    // $Phone = $_POST["Phone"];
+    // $Address = $_POST["Address"];
+    // $DOB = $_POST["DOB"];
+    $Status = $_POST["Status"];
 
     do {
-        if (empty($SSN) || empty($Name) || empty($Email) || empty($Phone) || empty($Address) || empty($DOB) || empty($Physician)) {
+        if (empty($SSN) || /*empty($Name) || empty($Email) || empty($Phone) || empty($Address) || empty($DOB) ||*/ empty($Status)) {
             $errorMessage = "All fields are required";
             break;
         }
 
         $sql = "UPDATE patients SET 
-            Patient_Name = '$Name',
-            Patient_Email = '$Email',
-            Patient_Phone = '$Phone',
-            Patient_Address = '$Address',
-            Patient_Ages = '$DOB',
-            Patient_Physician = '$Physician'
+            Status = '$Status'
         WHERE Patient_SSN = '$SSN'";
 
-        $result = $connection->query($sql);
+        $result = $conn->query($sql);
 
         if (!$result) {
-            $errorMessage = "Invalid query: " . $connection->error;
+            $errorMessage = "Invalid query: " . $conn->error;
             break;
         }
 
         $successMessage = "Patient updated correctly";
 
-        header("location: /users/patientcreate.php?SSN=$SSN");
+        header("location: patientedit.php");
         exit;
     } while (false);
 }
@@ -108,15 +99,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ";
         }
         ?>
-        <form method="post" action="patientcreate.php">
+        <form method="post" action="patientedit.php">
             <input type="hidden" name="SSN" value="<?php echo $SSN; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">SSN</label>
+                <label class="col-sm-3 col-form-label">Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Name" value="<?php echo $Name; ?>">
+                    <input type="text" class="form-control" name="Name" value="<?php echo $Name; ?>" readonly>
                 </div>
             </div>
-            <!-- Rest of the form fields -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Status" value="<?php echo $Status; ?>">
+                </div>
+            </div>
 
             <?php
             if (!empty($successMessage)) {
@@ -137,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/users/patientcreate.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="adminView.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

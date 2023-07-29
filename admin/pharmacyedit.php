@@ -1,24 +1,14 @@
 <?php 
 
-$servername ="localhost";
-$username ="root";
-$password="";
-$database="users";
-
-//create connection 
-$connection= new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-
-$id = $_GET['id']; // Get the user ID from the query parameter
+session_start();
+require_once("../connect.php");
 
 $name="";
+$drug_name="";
+$drug_price="";
+$address="";
 $phone="";
-$specialty="";
-$experience="";
+
 
 $errorMessage = "";
 $successMessage="";
@@ -27,59 +17,55 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET'){
     //GET method: Show the data of the client 
 
     if (!isset( $_GET['id']) ){
-        header("location: doctorsindex.php");
+        header("location: adminView.php");
         exit;
+    }else {
+        $id = $_GET['id']; 
     }
 
     //read the row of the selected client from the database table 
-    $sql = $connection->prepare("SELECT * FROM doctors WHERE id = ? ");
+    $sql = $conn->prepare("SELECT * FROM pharmacy WHERE Pharmacy_ID = ?");
     $sql->bind_param("i", $id);
     $sql->execute();
     $row = $sql->get_result()->fetch_assoc();
 
     if (!$row) {
-        header("location: doctorsindex.php");
+        header("location: adminView.php");
         exit;
     }
 
-    $name = $row["name"];
-    $phone = $row["phone"];
-    $specialty = $row["specialty"];
-    $experience = $row["experience"];
+    $name = $row["Pharmacy_Name"];
+    $status = $row["Status"];
 }
 
 
 else{
-    //POST method: Update the data of the doctor
+    //POST method: Update the data of the client 
 
-    $id = $_POST["id"];
+    $id = $_POST["ID"];
     $name = $_POST["name"];
-    $phone = $_POST["phone"];
-    $specialty = $_POST["specialty"];
-    $experience = $_POST["experience"];
+    $status = $_POST["status"];
 
     do{
-        if ( empty($id) || empty($name) || empty($specialty) || empty($phone) || empty($experience)){
+        if ( empty($name) || empty($status)){
             $errorMessage ="All the fieds are required";
             break;
         }
         //add new user to database 
-        $sql = "UPDATE  doctors " .
-        "SET name = '$name', phone = '$phone' , specialty = '$specialty', Experience = '$experience' " .
-        "WHERE id = $id ";
+        $sql = "UPDATE  pharmacy 
+        SET Status = '$status'WHERE Pharmacy_ID = $id";
 
-        $result = $connection->query($sql);
+        $result = $conn->query($sql);
 
         if (!$result) {
-            $errorMessage = "Invalid Query: " . $connection->error;
+            $errorMessage = "Invalid Query: " . $conn->error;
             break;
         }
 
         $successMessage = "User updated Correctly";
 
-        header("location: doctorsindex.php");
-
-        exit;
+        header("location: pharmacyedit.php");
+        exit();
 
     }while (false);
 }
@@ -92,12 +78,12 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-COMPLATIBLE" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial scale=1.0">
-    <title>Doctors</title>
+    <title>PHARMACY</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class= "container my-5">
-        <h2>New Doctor</h2>
+        <h2>Edit Pharmacy</h2>
 
         <?php
         if( !empty($errorMessage)){
@@ -109,33 +95,21 @@ else{
                  ";
         }
         ?>
-        <form method ="post">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <form method="post" action="pharmacyedit.php">
+
+        <input type="hidden" name="ID" value="<?php echo $id; ?>">
+        <?php echo $id; ?>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form label">Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="name" value="<?php echo $name?>">
+                    <input type="text" class="form-control" name="name" value="<?php echo $name?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form label">Phone</label>
+                <label class="col-sm-3 col-form label">Status</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="phone" value="<?php echo $phone?>">
+                    <input type="text" class="form-control" name="status" value="<?php echo $status?>">
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form label">Specialty</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="specialty" value="<?php echo $specialty?>">
-                </div>
-
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form label">Experience</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="experience" value="<?php echo $experience?>">
-                </div>
-            </div>
 
 
             <?php
@@ -154,10 +128,10 @@ else{
             ?>
             <div class= "row mb-3">
                 <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/users/doctorsindex.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="adminView.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

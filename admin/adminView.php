@@ -103,6 +103,7 @@ $ID = $_SESSION["user"]["Admin_ID"];
                         <th>Gender</th>                   
                         <th>Age</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,8 +138,10 @@ $ID = $_SESSION["user"]["Admin_ID"];
                             <td>$row[Patient_Gender]</td>
                             <td>$row[Patient_Age]</td>
                             <td>$row[Status]</td>
-                        </tr>
-                        ";
+                            <td>
+                                <a class='btn btn-danger btn-sm' href='patientedit.php?SSN=" . $row["Patient_SSN"] ."'>Edit</a>
+                            </td>
+                        </tr>";
                     }
                     ?>
                 </tbody>
@@ -170,6 +173,7 @@ $ID = $_SESSION["user"]["Admin_ID"];
                         <th>Speciality</th>
                         <th>Experience</th>                   
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -203,8 +207,10 @@ $ID = $_SESSION["user"]["Admin_ID"];
                             <td>$row[Doctor_Speciality]</td>
                             <td>$row[Doctor_Experience]</td>
                             <td>$row[Status]</td>
-                        </tr>
-                        ";
+                            <td>
+                                <a class='btn btn-danger btn-sm' href='doctoredit.php?SSN=" . $row["Doctor_SSN"] ."'>Edit</a>
+                            </td>
+                        </tr>";
                     }
                     ?>
                 </tbody>
@@ -235,6 +241,7 @@ $ID = $_SESSION["user"]["Admin_ID"];
                         <th>Phone</th>
                         <th>Address</th>                   
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -268,6 +275,9 @@ $ID = $_SESSION["user"]["Admin_ID"];
                             <td>$row[Pharmacy_Phone]</td>
                             <td>$row[Pharmacy_Address]</td>
                             <td>$row[Status]</td>
+                            <td>
+                            <a class='btn btn-danger btn-sm' href='pharmacyedit.php?id=" . $row["Pharmacy_ID"] ."'>Edit</a>
+                            </td>
                         </tr>
                         ";
                     }

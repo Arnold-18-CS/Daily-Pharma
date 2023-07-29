@@ -211,7 +211,7 @@ $username = $_SESSION["user"]["Company_Name"];
                                     echo "<td>" . $row["End_Date"] . "</td>";
                                     echo "<td>" . $row["Status"] . "</td>";
                                     echo "<td>";
-                                    if ($row["Status"] == 'Active') {
+                                    if ($row["Status"] == 'Active' || 'active' || 'ACTIVE') {
                                         echo "<a class='btn btn-danger btn-sm' href='terminate_contract.php?contractID=" . $row["Contract_ID"] . " &email= + " . $row["Supervisor_Email"] ."'>Terminate</a>";
                                     }
                                     echo "</td>";
