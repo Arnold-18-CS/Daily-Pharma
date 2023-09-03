@@ -1,11 +1,6 @@
 <?php
+include "../inc/session_header.php";
 
-session_start();
-
-require_once("../connect.php");
-
-$ID = $_SESSION["userid"];
-$username = $_SESSION["username"];
 $patientAddress = $_SESSION["userdata"]["Patient_Address"];
 $selectedDrug = $_SESSION['selected_drug'];
 

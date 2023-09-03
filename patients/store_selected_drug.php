@@ -1,6 +1,5 @@
 <?php
-// Establish a PHP session (if needed)
-session_start();
+include "../inc/session_header.php";
 
 // Get the selected drug name from the request body
 $data = json_decode(file_get_contents("php://input"), true);
