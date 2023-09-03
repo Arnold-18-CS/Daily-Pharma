@@ -28,8 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 //tests if the entered password matches that in the database
                 if ($password == $row['Password']){
-                    $_SESSION["userid"] = $row['Admin_Name'];
-                    $_SESSION["user"] = $row;
+                    $_SESSION["user"] = "Admin";
+                    $_SESSION["userid"] = $row['Admin_ID'];
+                    $_SESSION["username"] = $row['Admin_Name'];
+                    $_SESSION["userdata"] = $row;
+                    
             
                     //close them to prevent further action upon them
                     $query->close();

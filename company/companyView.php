@@ -1,5 +1,5 @@
 <?php
-// doctorView.php
+// companyView.php
 
 //establish a php session
 session_start();

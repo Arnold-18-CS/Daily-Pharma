@@ -28,8 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 //tests if the entered password matches that in the database
                 if (hash_equals($password, $row['Password'])) {
-                    $_SESSION["userid"] = $pharmacyID;
-                    $_SESSION["user"] = $row;
+                    $_SESSION["user"] = "Pharmacy";
+                    $_SESSION["userid"] = $row['Pharmacy_ID'];
+                    $_SESSION["username"] = $row['Pharmacy_Name'];
+                    $_SESSION["userdata"] = $row;
             
                     //close them to prevent further action upon them
                     $query->close();
