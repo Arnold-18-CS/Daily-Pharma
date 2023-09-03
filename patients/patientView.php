@@ -1,99 +1,5 @@
-<?php
-// patientView.php
+<?php include "../inc/header.php";?>
 
-//establish a php session
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
-    // Redirect to the login page if the user is not logged in
-    header("Location: ../login.html");
-    exit;
-}
-
-require_once("connect.php");
-
-
-// Check if the user is logged in
-if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
-    // Redirect to the login page if the user is not logged in
-    header("Location: ../login.html");
-    exit;
-}
-
-// Get the user information from the session variables
-$username = $_SESSION["userid"];
-$user = $_SESSION["user"];
-$patientAddress = $_SESSION["user"]["Patient_Address"];
-$patientSSN = $_SESSION["user"]["Patient_SSN"];
-
-
-// Fetch drug information along with the prices from the drug_prices and pharmacies tables
-$query = $conn->query("
-    SELECT d.Drug_ID, d.Drug_Name, d.Drug_Description, d.Drug_Manufacturing_Date, d.Drug_Expiration_Date, p.Pharmacy_Name, dp.Drug_Price
-    FROM drugs d
-    INNER JOIN drug_prices dp ON d.Drug_ID = dp.Drug_ID
-    INNER JOIN pharmacy p ON dp.Pharmacy_ID = p.Pharmacy_ID
-");
-
-$drugInformation = array();
-while ($row = $query->fetch_assoc()) {
-    $drugInformation[] = $row;
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../style.css">
-    <title> DailyPharma - Patient Home</title>
-</head>
-<body class="PatientView">
-
-    <!--Header-->
-    <header>
-        <div class="logo">
-            <a href="../index.html">DailyPharma</a>
-        </div>
-
-        <div class="navbar">
-            <nav class= navbar id="navbar">
-                <a href="../index.html">Home</a>
-                <a href="#about">Features</a>
-                <a href="#inquiries">Medical Inquiries</a>
-                <a href="#footer">Contact Us</a>
-                <a href="../logout.php" class="btn-login-popup">Logout</a>
-            </nav>
-
-
-            <?php
-                echo '<div class="profile">';
-                echo '<a href="profile.php">';
-                echo '<i class="uil uil-user"></i>' . $username . '';
-                echo '</a>';
-                echo '</div>';
-            ?>
-        </div>
-
-        <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
-
-        <div id="menu" onclick="toggleOverlay()">
-            <div id="menu-content">
-                <a href="../index.html">Home</a>
-                <a href="#about">Features</a>
-                <a href="#inquiries">Inquiries</a>
-                <a href="#footer">Contact Us</a>
-                <a href="profile.php">Profile</a><!--Place username here-->
-                <a href="../logout.php">Logout</a>
-            </div>
-        </div>
-    </header>
 
     <!-- Above fold -->
     <div class="image-container" id="about">
@@ -141,6 +47,23 @@ while ($row = $query->fetch_assoc()) {
           <div class="main_content">
             <div class="category-content" id="Order-Drugs">
 
+            <?php 
+            
+            // Fetch drug information along with the prices from the drug_prices and pharmacies tables
+$query = $conn->query("
+SELECT d.Drug_ID, d.Drug_Name, d.Drug_Description, d.Drug_Manufacturing_Date, d.Drug_Expiration_Date, p.Pharmacy_Name, dp.Drug_Price
+FROM drugs d
+INNER JOIN drug_prices dp ON d.Drug_ID = dp.Drug_ID
+INNER JOIN pharmacy p ON dp.Pharmacy_ID = p.Pharmacy_ID
+");
+
+$drugInformation = array();
+while ($row = $query->fetch_assoc()) {
+$drugInformation[] = $row;
+}
+
+            ?>
+
             <div class="select-container">
                 <label for="availableDrugs">Available Drugs</label>
                 <select name="availableDrugs" id="availableDrugs">
@@ -186,7 +109,7 @@ while ($row = $query->fetch_assoc()) {
                                 require_once("../connect.php");
 
                                 // Retrieve prescription data from the database
-                                $sql = "SELECT * FROM prescriptions WHERE Prescribed = 'N' AND `Patient_SSN` = '$patientSSN';";
+                                $sql = "SELECT * FROM prescriptions WHERE Prescribed = 'N' AND `Patient_SSN` = '$ID';";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -265,7 +188,7 @@ while ($row = $query->fetch_assoc()) {
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <div class="col-sm-3 d-grid">
-                        <a class="btn btn-outline-primary" href="/users/patientindex.php" role="button">Cancel</a>
+                        <a class="btn btn-outline-primary" href="#" role="button">Cancel</a>
                     </div>
                 </div>
             </form>
@@ -342,6 +265,7 @@ while ($row = $query->fetch_assoc()) {
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
     <script src="../script4.js"></script>
+    
     <script>
         const selectElement = document.getElementById("availableDrugs");
         const drugInfoDiv = document.getElementById("drugInfo");

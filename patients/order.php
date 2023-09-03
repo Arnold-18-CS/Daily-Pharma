@@ -4,16 +4,15 @@ session_start();
 
 require_once("../connect.php");
 
-$username = $_SESSION["userid"];
-$user = $_SESSION["user"];
-$patientAddress = $_SESSION["user"]["Patient_Address"];
-$patientSSN = $_SESSION["user"]["Patient_SSN"];
+$ID = $_SESSION["userid"];
+$username = $_SESSION["username"];
+$patientAddress = $_SESSION["userdata"]["Patient_Address"];
 $selectedDrug = $_SESSION['selected_drug'];
 
 
 
 $result = $conn->query(
-    "INSERT INTO `orders` (Drug_ID, Patient_SSN) VALUES ('$selectedDrug','$patientSSN')"
+    "INSERT INTO `orders` (Drug_ID, Patient_SSN) VALUES ('$selectedDrug','$ID')"
 );
 
 if ($result === true) {
@@ -25,6 +24,5 @@ if ($result === true) {
     window.location.href = 'patientView.php';
     </script>";
 }
-
 
 ?>
